@@ -1,0 +1,12 @@
+<div wth-cursor-dialog id="lmap"></div>
+<div id="cursor-dialog-box">{{mouseTemperature}} &deg;C</div>
+
+<div *ngIf="loadingStatus" class="loading">Loading...</div>
+
+<div class="color-wrap">
+  <div class="deg-box">&deg;C</div>
+  <div class="color-box" *ngFor="let colorItem of colorList.reverse();">
+    <div class="color-item" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}" >{{colorItem.tempValue}}</div>
+  </div>
+</div>
+<canvas style="display: none" id="temp-image"></canvas>
