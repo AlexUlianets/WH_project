@@ -1,0 +1,40 @@
+<div class="filter-select">
+  <label *ngFor="let filter of filters">
+    {{ filter.value }}
+    <input (change)="filterSelected($event.target.value)" [value]="filter.value" name="filter" type="radio">
+  </label>
+</div>
+
+<div wth-cursor-dialog id="lmap"></div>
+<div id="cursor-dialog-box">{{mouseTemperature}} <span *ngIf="currentFilter === 'temperature'">&deg;C</span><span *ngIf="currentFilter === 'clouds'">%</span><span *ngIf="currentFilter === 'precipitations'">мм</span></div>
+
+<div *ngIf="loadingStatus" class="loading">Loading...</div>
+
+<div class="color-wrap" *ngIf="currentFilter === 'temperature'">
+  <div class="deg-box">&deg;C</div>
+  <div class="color-box" *ngFor="let colorItem of colorList.reverse();">
+    <div class="color-item" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}">{{colorItem.tempValue}}</div>
+  </div>
+</div>
+
+<div class="calendar-wrap">
+  <!--<label for="calendar">{{calendarFormatted}}</label>-->
+  <div class="calendar-box">
+    <p-calendar [(ngModel)]="calendar" dateFormat="dd.mm.yy"
+                [disabled]="calendarDisabled"
+                [utc]="true"
+                [showTime]="calendarShowTime"
+                [hourFormat]="24"
+                [locale]="langRU"
+                [showOtherMonths]="false"
+                [minDate]="calendarMinDate"
+                [maxDate]="calendarMaxDate"
+                [inputId]="'calendar'"
+                [readonlyInput]="true"></p-calendar>
+  </div>
+  <div class="update-btn-box">
+    <a href="#" (click)="applyUpdateMap($event)">Обновить</a>
+  </div>
+</div>
+
+<canvas style="display: none" id="temp-image"></canvas>
