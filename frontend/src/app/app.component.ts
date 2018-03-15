@@ -185,7 +185,7 @@ export class AppComponent {
         displayPosition: 'bottomleft',
         displayEmptyString: 'No wind data'
       },
-      overlayName: 'Ветер',
+      overlayName: 'Wind',
 
       // https://github.com/danwild/wind-js-server
       // pingUrl: 'http://localhost:7000/alive',
