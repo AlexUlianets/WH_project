@@ -21,24 +21,24 @@
 
 
   <div class="m_days_menu">
-    <div class="mobile_active_temp visible-xs">
+<!--     <div class="mobile_active_temp visible-xs">
       <div id="active_days">
         <span>Now</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
-    </div>
+    </div> -->
     <ul class="m_menu">
-      <li class="active"><a href="#">Now</a></li>
-      <li><a href="#">SUN, 09.04</a></li>
-      <li><a href="#">SAT, 08.04</a></li>
-      <li><a href="#">FRI, 07.04</a></li>
-      <li><a href="#">THU, 05.04</a></li>
-      <li class="today">
+      <li (click)="applyUpdateMap($event, !1, '0')" class="today" id="active_days">
         <a href="#">
           <span class="today">TODAY</span>
-          <span class="date">Wed, 05.04</span>
+          <span class="date">{{calDate.days[0]}}</span>
         </a>
       </li>
+      <li (click)="applyUpdateMap($event, !1, '1')"><a href="#">{{calDate.days[1]}}</a></li>
+      <li (click)="applyUpdateMap($event, !1, '2')"><a href="#">{{calDate.days[2]}}</a></li>
+      <li (click)="applyUpdateMap($event, !1, '3')"><a href="#">{{calDate.days[3]}}</a></li>
+      <li (click)="applyUpdateMap($event, !1, '4')"><a href="#">{{calDate.days[4]}}</a></li>
+      <!-- <li class="active"><a href="#">Now</a></li> -->
     </ul>
   </div>
 
@@ -63,11 +63,97 @@
         <div class="title">next</div>
       </div>
     </div>
-    <div id="slider_range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 52.1739%;"></span><span class="ui-slider-pip ui-slider-pip-first ui-slider-pip-hide ui-slider-pip-0" style="left: 0%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="0">0:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-1" style="left: 4.3478%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="1">1:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-2" style="left: 8.6957%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="2">2:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-3" style="left: 13.0435%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="3">3:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-4" style="left: 17.3913%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="4">4:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-5" style="left: 21.7391%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="5">5:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-6" style="left: 26.0870%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="6">6:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-7" style="left: 30.4348%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="7">7:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-8" style="left: 34.7826%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="8">8:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-9" style="left: 39.1304%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="9">9:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" style="left: 43.4783%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="10">10:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-11" style="left: 47.8261%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="11">11:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-12 ui-slider-pip-initial ui-slider-pip-selected" style="left: 52.1739%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="12">12:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-13" style="left: 56.5217%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="13">13:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-14" style="left: 60.8696%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="14">14:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-15" style="left: 65.2174%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="15">15:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-16" style="left: 69.5652%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="16">16:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-17" style="left: 73.9130%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="17">17:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-18" style="left: 78.2609%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="18">18:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-19" style="left: 82.6087%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="19">19:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-20" style="left: 86.9565%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="20">20:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-21" style="left: 91.3043%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="21">21:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-22" style="left: 95.6522%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="22">22:00</span></span><span class="ui-slider-pip ui-slider-pip-last ui-slider-pip-hide ui-slider-pip-23" style="left: 100%"><span class="ui-slider-line"></span><span class="ui-slider-label" data-value="23">23:00</span></span>
+
+    <div id="slider_range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips">
+      <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" [style.left.%]="calDate.hours*4.3478"></span>
+      <span class="ui-slider-pip ui-slider-pip-first ui-slider-pip-hide ui-slider-pip-0" style="left: 0%" (click)="applyUpdateMap($event, '0', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="0">0:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-1" style="left: 4.3478%" (click)="applyUpdateMap($event, '1', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="1">1:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-2" style="left: 8.6957%" (click)="applyUpdateMap($event, '2', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="2">2:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-3" style="left: 13.0435%" (click)="applyUpdateMap($event, '3', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="3">3:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-4" style="left: 17.3913%" (click)="applyUpdateMap($event, '4', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="4">4:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-5" style="left: 21.7391%" (click)="applyUpdateMap($event, '5', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="5">5:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-6" style="left: 26.0870%" (click)="applyUpdateMap($event, '6', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="6">6:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-7" style="left: 30.4348%" (click)="applyUpdateMap($event, '7', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="7">7:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-8" style="left: 34.7826%" (click)="applyUpdateMap($event, '8', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="8">8:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-9" style="left: 39.1304%" (click)="applyUpdateMap($event, '9', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="9">9:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" style="left: 43.4783%" (click)="applyUpdateMap($event, '10', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="10">10:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-11" style="left: 47.8261%" (click)="applyUpdateMap($event, '11', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="11">11:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-12 ui-slider-pip-initial ui-slider-pip-selected" style="left: 52.1739%" (click)="applyUpdateMap($event, '12', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="12">12:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-13" style="left: 56.5217%" (click)="applyUpdateMap($event, '13', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="13">13:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-14" style="left: 60.8696%" (click)="applyUpdateMap($event, '14', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="14">14:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-15" style="left: 65.2174%" (click)="applyUpdateMap($event, '15', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="15">15:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-16" style="left: 69.5652%" (click)="applyUpdateMap($event, '16', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="16">16:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-17" style="left: 73.9130%" (click)="applyUpdateMap($event, '17', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="17">17:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-18" style="left: 78.2609%" (click)="applyUpdateMap($event, '18', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="18">18:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-19" style="left: 82.6087%" (click)="applyUpdateMap($event, '19', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="19">19:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-20" style="left: 86.9565%" (click)="applyUpdateMap($event, '20', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="20">20:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-21" style="left: 91.3043%" (click)="applyUpdateMap($event, '21', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="21">21:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-22" style="left: 95.6522%" (click)="applyUpdateMap($event, '22', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="22">22:00</span></span><span class="ui-slider-pip ui-slider-pip-last ui-slider-pip-hide ui-slider-pip-23" style="left: 100%" (click)="applyUpdateMap($event, '23', '0')"><span class="ui-slider-line"></span>
+      <span class="ui-slider-label" data-value="23">23:00</span></span>
     </div>
+
   </div>
+
+
+
 </div>
 
+<div id="pHoursTop">
+  <div class="m_temp_menu">
+      <div class="mobile_active_temp visible-xs">
+          <div id="active_temp">
+              <span class="title">Cloud</span>
+              <span class="img_warp">
+                  <span class="icon cloud">cloud</span>
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </span>
+          </div>
+      </div>
+      <ul class="m_menu">
+          <li>
+              <a href="#">
+                  <span class="title">Temp</span>
+                  <span class="img_warp">
+                      <span class="icon temp">temp</span>
+                  </span>
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                  <span class="title">Pressure</span>
+                  <span class="img_warp">
+                      <span class="icon pressure">pressure</span>
+                  </span>
+              </a>
+          </li>
+          <li class="active">
+              <a href="#">
+                  <span class="title">Cloud</span>
+                  <span class="img_warp">
+                      <span class="icon cloud">cloud</span>
+                  </span>
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                  <span class="title">Wind</span>
+                  <span class="img_warp">
+                      <span class="icon wind">wind</span>
+                  </span>
+              </a>
+          </li>
+      <!--     <li>
+              <a href="#">
+                  <span class="title">UV index</span>
+                  <span class="img_warp uv">
+                      uv
+                  </span>
+              </a>
+          </li> -->
+      </ul>
+  </div>
+</div>
 
 <div class="calendar-wrap">
   <!--<label for="calendar">{{calendarFormatted}}</label>-->

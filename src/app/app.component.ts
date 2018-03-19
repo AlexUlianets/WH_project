@@ -72,6 +72,8 @@ export class AppComponent {
   CanvasLayer: any;
 
   calendar = moment().utc().startOf('day').toDate();
+
+
   calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
   calendarMaxDate = moment(this.calendarMinDate).utc().add(4,'d').endOf('day').toDate();
   // calendar = moment().utc().set({'year': 2016, 'month': 10, 'date': 4}).startOf('day').toDate();
@@ -90,6 +92,17 @@ export class AppComponent {
     clear: 'Очистить'
   };
 
+  // console.log(langRU);
+  calDate: any = {
+    hours: parseInt( moment(this.calendar).utc().startOf('hour').format('h') ),
+    days: [
+      moment(this.calendar).utc().startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(1,'d').startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(2,'d').startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(3,'d').startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(4,'d').startOf('day').format('ddd, DD.MM')
+    ],
+  };
 
   constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService) {
   }
@@ -495,8 +508,21 @@ export class AppComponent {
     return colorConfig;
   }
 
-  applyUpdateMap($event) {
+  applyUpdateMap($event, h, d) {
     $event.preventDefault();
+    if(h){
+      this.calendar = moment().utc().startOf('day').add(d, 'd').add(h, 'h').toDate();
+      this.calDate.hours = h;
+    }else{
+      this.calendar = moment(this.calendar).utc().add(d, 'd').toDate();
+      document.getElementById('active_days').id = '';
+      if($event.target.nodeName != 'LI'){
+        $event.target.closest('li').id = 'active_days';
+      }else{
+        $event.target.id = 'active_days';
+      }
+    }
+    console.log(this.calendar);
     this.updateMap();
   }
 
