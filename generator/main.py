@@ -14,8 +14,11 @@ import DB
 
 startTime = time.time()
 
-filename = '/home/ubuntu/maps_app/generator/data/weather.csv'
-zip_filename = '/home/ubuntu/maps_app/generator/data/wwo-data.csv.gz'
+#filename = '/home/ubuntu/maps_app/generator/data/weather.csv'
+#zip_filename = '/home/ubuntu/maps_app/generator/data/wwo-data.csv.gz'
+
+filename = 'C:\OPLAO\GITREPO\weathermap\generator\data\weather.csv'
+zip_filename = 'C:\OPLAO\GITREPO\weathermap\generator\data\wwo-data.csv.gz '
 
 print 'Downloading weather file'
 url = "http://bkwdv.worldweatheronline.com/data/wwo-data.csv.gz"
