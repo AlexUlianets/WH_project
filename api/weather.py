@@ -5,6 +5,14 @@ from flask.ext.mysql import MySQL
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+
+##for development only
+#from content_access import get_image
+#from content_access import get_wind
+#app.add_url_rule( '/images/<image>', 'get_image', get_image, methods=['GET'])
+#app.add_url_rule( '/images/wind/<wind>', 'get_wind', get_wind, methods=['GET'])
+##end of for development
+
 CORS(app)
 mysql = MySQL()
 
@@ -33,6 +41,11 @@ def image():
         wind = 'images/wind/' + data[0] + '.json'
         return jsonify({'path': path, 'wind': wind})
     else:
+        ##test only
+        #path = 'images/clouds.png'
+        #wind = 'images/wind/wind.json'
+        #return jsonify({'path': path, 'wind': wind})
+        #test end
         return jsonify({})
 
 if __name__ == "__main__":
