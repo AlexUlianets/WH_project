@@ -10,13 +10,6 @@
 
 <div *ngIf="loadingStatus" class="loading">Loading...</div>
 
-<div class="color-wrap" *ngIf="currentFilter === 'temperature'">
-  <div class="deg-box">&deg;C</div>
-  <div class="color-box" *ngFor="let colorItem of colorList.reverse();">
-    <div class="color-item" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}">{{colorItem.tempValue}}</div>
-  </div>
-</div>
-
 <div id="pHours">
 
 
@@ -146,95 +139,11 @@
   </div>
   <div class="m_uv_wrap" *ngIf="currentFilter === 'temperature'">
     <div class="m_uv_colors">
-        <div class="uv_index_1 color_item">
+        <div class="uv_index_1 color_item" *ngFor="let colorItem of colorList.reverse();">
             <div class="uv_color_wrap">
-                <div class="uv_color uv_color_1"></div>
+                <div class="uv_color uv_color_1" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}"></div>
             </div>
-            <div class="count">50</div>
-        </div>
-        <div class="uv_index_2 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_2"></div>
-            </div>
-            <div class="count">40</div>
-        </div>
-        <div class="uv_index_3 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_3"></div>
-            </div>
-            <div class="count">30</div>
-        </div>
-        <div class="uv_index_4 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_4"></div>
-            </div>
-            <div class="count">25</div>
-        </div>
-        <div class="uv_index_5 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_5"></div>
-            </div>
-            <div class="count">20</div>
-        </div>
-        <div class="uv_index_6 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_6"></div>
-            </div>
-            <div class="count">15</div>
-        </div>
-        <div class="uv_index_7 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_7"></div>
-            </div>
-            <div class="count">10</div>
-        </div>
-        <div class="uv_index_8 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_8"></div>
-            </div>
-            <div class="count">5</div>
-        </div>
-        <div class="uv_index_9 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_9"></div>
-            </div>
-            <div class="count">0</div>
-        </div>
-        <div class="uv_index_10 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_10"></div>
-            </div>
-            <div class="count">-5</div>
-        </div>
-        <div class="uv_index_11 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_11"></div>
-            </div>
-            <div class="count">-10</div>
-        </div>
-        <div class="uv_index_11 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_11"></div>
-            </div>
-            <div class="count">-15</div>
-        </div>
-        <div class="uv_index_11 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_11"></div>
-            </div>
-            <div class="count">-20</div>
-        </div>
-        <div class="uv_index_11 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_11"></div>
-            </div>
-            <div class="count">-30</div>
-        </div>
-        <div class="uv_index_11 color_item">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_11"></div>
-            </div>
-            <div class="count">-40</div>
+            <div class="count">{{colorItem.tempValue}}</div>
         </div>
     </div>
 </div>
