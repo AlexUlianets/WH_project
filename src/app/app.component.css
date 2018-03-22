@@ -109,13 +109,14 @@
 
 
 
-.calendar-wrap{
-  visibility: hidden;
+.calendar-wrap, .leaflet-control-layers.leaflet-control, .color-wrap{
+  display: none !important;
 }
 
 
 
 
+@font-face{font-family:'FontAwesome';src:url(/assets/fonts/fontawesome-webfont.eot?v=4.7.0);src:url(/assets/fonts/fontawesome-webfont.eot#iefix&v=4.7.0) format('embedded-opentype'),url(/assets/fonts/fontawesome-webfont.woff2?v=4.7.0) format('woff2'),url(/assets/fonts/fontawesome-webfont.woff?v=4.7.0) format('woff'),url(/assets/fonts/fontawesome-webfont.ttf?v=4.7.0) format('truetype'),url(/assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format('svg');font-weight:normal;font-style:normal;}
 
 #pHours{
   width: 100%;
@@ -124,8 +125,7 @@
   bottom: 40px;
   box-sizing: border-box;
   height: 0;
-  padding-right: 50px;
-  padding-left: 10px;
+  padding: 0 10px;
 }
 #pHours button {
   color: inherit;
@@ -422,15 +422,16 @@
   transition: all .2s ease;
 }
 #pHours .m_days_menu ul > li > a {
-  background: rgba(210, 210, 210, 0.4);
-  color: rgba(255, 255, 255, 0.4);
+  background: rgba(210, 210, 210, 0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 #pHours .m_days_menu ul > li > a:hover {
   text-decoration: none;
 }
 #pHours #active_days,
 #pHours .m_days_menu ul > li:hover > a,
-#pHours .m_days_menu ul > li.active > a {
+#pHours .m_days_menu ul > li.active > a,
+#pHours .m_days_menu ul > li#active_days > a {
   background: #9fc920;
   color: #fff;
 }
@@ -509,7 +510,7 @@
   padding-right: 10px;
   position: absolute;
   z-index: 1000;
-  top: 40px;
+  top: 0px;
   box-sizing: border-box;
   height: 0;
 }
@@ -597,6 +598,12 @@
   text-decoration: underline;
   color: #9fc920;
 }
+#pHoursTop .m_temp_menu {
+  display: inline-block;
+  right: 15px;
+  position: absolute;
+  top: 0;
+}
 #pHoursTop .map_page_section .m_temp_menu {
   display: block;
   position: absolute;
@@ -661,12 +668,12 @@
   mask: url(/assets/images/svg/temp.svg) no-repeat center center;
 }
 #pHoursTop .m_temp_menu ul > li > a .img_warp .icon.pressure {
-  -webkit-mask: url(/assets/images/svg/pressure.svg) no-repeat center center;
-  mask: url(/assets/images/svg/pressure.svg) no-repeat center center;
+  -webkit-mask: url(/assets/images/svg/umbrella.svg) no-repeat center center;
+  mask: url(/assets/images/svg/umbrella.svg) no-repeat center center;
 }
 #pHoursTop #active_temp .img_warp .icon.cloud,
 #pHoursTop .m_temp_menu ul > li > a .img_warp .icon.cloud {
-  -webkit-mask: url(../assets/images/svg/cloud.svg) no-repeat center center;
+  -webkit-mask: url(/assets/images/svg/cloud.svg) no-repeat center center;
   mask: url(/assets/images/svg/cloud.svg) no-repeat center center;
 }
 #pHoursTop .m_temp_menu ul > li > a .img_warp .icon.wind {
@@ -767,4 +774,76 @@
     bottom: inherit;
   }
 }
-
+#pHoursTop .map_page_section .m_uv_wrap {
+  display: block;
+  position: absolute;
+  z-index: 20;
+}
+#pHoursTop .map_page_section .m_uv_wrap {
+  top: 43px;
+  right: 0;
+}
+#pHoursTop .m_uv_wrap > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+#pHoursTop .m_uv_wrap .m_uv_title {
+  color: #9fc920;
+  font-weight: bold;
+  padding-left: 10px;
+}
+#pHoursTop .m_uv_wrap .m_uv_title .top {
+  font-size: 24px;
+}
+#pHoursTop .m_uv_colors .color_item {
+  display: inline-block;
+  float: left;
+  margin: 0 1px;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+}
+#pHoursTop .m_uv_colors .uv_color {
+  display: block;
+  position: relative;
+  width: 22px;
+  height: 22px;
+}
+#pHoursTop .m_uv_wrap{
+  text-align: center;
+  padding-top: 15px;
+  pointer-events: none;
+}
+#pHoursTop .uv_color_1 {
+  background: #4b9100;
+}
+#pHoursTop .uv_color_2 {
+  background: #9fc920;
+}
+#pHoursTop .uv_color_3 {
+  background: #e4f364;
+}
+#pHoursTop .uv_color_4 {
+  background: #fffb99;
+}
+#pHoursTop .uv_color_5 {
+  background: #ffff00;
+}
+#pHoursTop .uv_color_6 {
+  background: #ffd324;
+}
+#pHoursTop .uv_color_7 {
+  background: #f8b03f;
+}
+#pHoursTop .uv_color_8 {
+  background: #f24841;
+}
+#pHoursTop .uv_color_9 {
+  background: #c7121f;
+}
+#pHoursTop .uv_color_10 {
+  background: #c11185;
+}
+#pHoursTop .uv_color_11 {
+  background: #4b2b51;
+}
