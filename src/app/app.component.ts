@@ -94,7 +94,7 @@ export class AppComponent {
 
   // console.log(langRU);
   calDate: any = {
-    hours: parseInt( moment(this.calendar).utc().startOf('hour').format('h') ),
+    hours: parseInt( moment().startOf('hour').format('H') ),
     days: [
       moment(this.calendar).utc().startOf('day').format('ddd, DD.MM'),
       moment(this.calendar).utc().add(1,'d').startOf('day').format('ddd, DD.MM'),
@@ -179,8 +179,9 @@ export class AppComponent {
 
     this.updateMap();
 
-    let layerControl = L.control.layers({});
-    layerControl.addTo(this.map);
+    let layerControl = null;
+    // let layerControl = L.control.layers({});
+    // layerControl.addTo(this.map);
     let handleError = function (err) {
       console.log('handleError...');
       console.log(err);
@@ -206,6 +207,16 @@ export class AppComponent {
       // nearestUrl: 'http://localhost:7000/nearest',
       errorCallback: handleError
     });
+
+  }
+
+  windOffOn(){
+    this.windJSLeaflet._destroyWind();
+    if(!this.windJSLeaflet.canvasStatus){
+      this.windJSLeaflet._canvasLayer = this.windJSLeaflet.LCanvasLayer.delegate(this.windJSLeaflet);
+      this.windJSLeaflet._map.addLayer(this.windJSLeaflet._canvasLayer);
+    }
+    this.windJSLeaflet.canvasStatus = !this.windJSLeaflet.canvasStatus;
   }
 
   public show(imgPath) {
@@ -527,6 +538,17 @@ export class AppComponent {
   }
 
   updateMap() {
+    setTimeout(() => {
+        // console.log(this.windJSLeaflet);
+        // this.windJSLeaflet.canvasStatus = !1;
+        // this.windJSLeaflet._destroyWind();
+        // setTimeout(() => {
+        //   this.windJSLeaflet.canvasStatus = !0;
+        //   // this._loadLocalData(this._data);
+        //   this.windJSLeaflet._initWindy(this.windJSLeaflet._data);
+        // }, 1000);
+    }, 60000);
+    console.log('mapUpdated');
     this.loadingStatus = true;
     this.calendarDisabled = true;
 

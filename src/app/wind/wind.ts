@@ -40,7 +40,7 @@ export class WindJSLeaflet {
 
       // create canvas, add overlay control
       this._canvasLayer = this.LCanvasLayer.delegate(this);
-      this._options.layerControl.addOverlay(this._canvasLayer, options.overlayName || 'wind');
+      // this._options.layerControl.addOverlay(this._canvasLayer, options.overlayName || 'wind');
 
       // ensure clean up on deselect overlay
       this._map.on('overlayremove', (e) => {
