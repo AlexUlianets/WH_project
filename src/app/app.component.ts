@@ -306,13 +306,18 @@ export class AppComponent {
           self.loadingStatus = false;
         }
       });
-
-      this.map.on('mousemove', function (event) {
+      let func33213 = function(event){
         let imageXStart = Math.floor(2 * (180 + event.latlng.lng));
         let imageYStart = Math.floor(2 * (85 - event.latlng.lat));
         let imageScope = 4 * (imageYStart * 720 + imageXStart);
         self.mouseTemperature = self.imageData.data[imageScope] - 150;
         $("#cursor-dialog-box").css({top: event.containerPoint.y + 10, left: event.containerPoint.x + 5}).show();
+      }
+      this.map.on('mousemove', function (event) {
+        func33213(event);
+      });
+      this.map.on('click', function (event) {
+        func33213(event);
       });
 
     };
