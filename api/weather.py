@@ -1,16 +1,16 @@
 import datetime
 import DB
 from flask import Flask, request, json, jsonify
-from flask.ext.mysql import MySQL
+from flaskext.mysql import MySQL
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 
 ##for development only
-#from content_access import get_image
-#from content_access import get_wind
-#app.add_url_rule( '/images/<image>', 'get_image', get_image, methods=['GET'])
-#app.add_url_rule( '/images/wind/<wind>', 'get_wind', get_wind, methods=['GET'])
+from content_access import get_image
+from content_access import get_wind
+app.add_url_rule( '/images/<type>/<image>', 'get_image', get_image, methods=['GET'])
+app.add_url_rule( '/images/wind/<wind>', 'get_wind', get_wind, methods=['GET'])
 ##end of for development
 
 CORS(app)
@@ -42,7 +42,7 @@ def image():
         return jsonify({'path': path, 'wind': wind})
     else:
         ##test only
-        #path = 'images/clouds.png'
+        #path = 'images/clouds/clouds.png'
         #wind = 'images/wind/wind.json'
         #return jsonify({'path': path, 'wind': wind})
         #test end

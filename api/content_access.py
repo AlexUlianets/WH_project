@@ -1,12 +1,9 @@
 import os
 from flask import send_file
-#from weather import app
 
-#@app.route('/images/<image>', methods=['GET'])
-def get_image(image):
-    return send_file(get_root_path() + "/images/" + image, mimetype='image/png')
+def get_image(type, image):
+    return send_file(get_root_path() + "/images/" + type + "/" + image, mimetype='image/png')
 
-#@app.route('/images/wind/<wind>', methods=['GET'])
 def get_wind(wind):
     return send_file(get_root_path() + "/images/wind/" + wind, mimetype='application/json')
 
