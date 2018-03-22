@@ -95,11 +95,6 @@
 
   </div>
 
-
-
-</div>
-
-<div id="pHoursTop">
   <div class="m_temp_menu">
       <div class="mobile_active_temp visible-xs">
           <div id="active_temp">
@@ -119,7 +114,7 @@
                   </span>
               </a>
           </li>
-          <li (click)="filterSelected('precipitations')" [ngClass]="currentFilter=='clouds'?'active':''">
+          <li (click)="filterSelected('precipitations')" [ngClass]="currentFilter=='precipitations'?'active':''">
               <a href="#">
                   <span class="title">Precipitations</span>
                   <span class="img_warp">
@@ -127,7 +122,7 @@
                   </span>
               </a>
           </li>
-          <li (click)="filterSelected('clouds')" [ngClass]="currentFilter=='precipitations'?'active':''">
+          <li (click)="filterSelected('clouds')" [ngClass]="currentFilter=='clouds'?'active':''">
               <a href="#">
                   <span class="title">Clouds</span>
                   <span class="img_warp">
@@ -153,7 +148,13 @@
           </li> -->
       </ul>
   </div>
-  <div class="m_uv_wrap">
+
+
+
+</div>
+
+<div id="pHoursTop">
+  <div class="m_uv_wrap" *ngIf="currentFilter=='temperature'">
     <div class="m_uv_colors">
         <div class="uv_index_1 color_item">
             <div class="uv_color_wrap">
@@ -221,10 +222,6 @@
             </div>
             <div class="count">11</div>
         </div>
-    </div>
-    <div class="m_uv_title">
-        <div class="top">UV</div>
-        <div class="bottom">index</div>
     </div>
 </div>
 </div>
