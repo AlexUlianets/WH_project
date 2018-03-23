@@ -72,6 +72,8 @@ export class AppComponent {
   CanvasLayer: any;
 
   calendar = moment().utc().startOf('day').toDate();
+
+
   calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
   calendarMaxDate = moment(this.calendarMinDate).utc().add(4,'d').endOf('day').toDate();
   // calendar = moment().utc().set({'year': 2016, 'month': 10, 'date': 4}).startOf('day').toDate();
@@ -90,6 +92,17 @@ export class AppComponent {
     clear: 'Очистить'
   };
 
+  // console.log(langRU);
+  calDate: any = {
+    hours: parseInt( moment().startOf('hour').format('H') ),
+    days: [
+      moment(this.calendar).utc().startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(1,'d').startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(2,'d').startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(3,'d').startOf('day').format('ddd, DD.MM'),
+      moment(this.calendar).utc().add(4,'d').startOf('day').format('ddd, DD.MM')
+    ],
+  };
 
   constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService) {
   }
@@ -166,8 +179,9 @@ export class AppComponent {
 
     this.updateMap();
 
-    let layerControl = L.control.layers({});
-    layerControl.addTo(this.map);
+    let layerControl = null;
+    // let layerControl = L.control.layers({});
+    // layerControl.addTo(this.map);
     let handleError = function (err) {
       console.log('handleError...');
       console.log(err);
@@ -193,6 +207,16 @@ export class AppComponent {
       // nearestUrl: 'http://localhost:7000/nearest',
       errorCallback: handleError
     });
+
+  }
+
+  windOffOn(){
+    this.windJSLeaflet._destroyWind();
+    if(!this.windJSLeaflet.canvasStatus){
+      this.windJSLeaflet._canvasLayer = this.windJSLeaflet.LCanvasLayer.delegate(this.windJSLeaflet);
+      this.windJSLeaflet._map.addLayer(this.windJSLeaflet._canvasLayer);
+    }
+    this.windJSLeaflet.canvasStatus = !this.windJSLeaflet.canvasStatus;
   }
 
   public show(imgPath) {
@@ -282,13 +306,18 @@ export class AppComponent {
           self.loadingStatus = false;
         }
       });
-
-      this.map.on('mousemove', function (event) {
+      let func33213 = function(event){
         let imageXStart = Math.floor(2 * (180 + event.latlng.lng));
         let imageYStart = Math.floor(2 * (85 - event.latlng.lat));
         let imageScope = 4 * (imageYStart * 720 + imageXStart);
         self.mouseTemperature = self.imageData.data[imageScope] - 150;
         $("#cursor-dialog-box").css({top: event.containerPoint.y + 10, left: event.containerPoint.x + 5}).show();
+      }
+      this.map.on('mousemove', function (event) {
+        func33213(event);
+      });
+      this.map.on('click', function (event) {
+        func33213(event);
       });
 
     };
@@ -495,12 +524,36 @@ export class AppComponent {
     return colorConfig;
   }
 
-  applyUpdateMap($event) {
+  applyUpdateMap($event, h, d) {
     $event.preventDefault();
+    if(h){
+      this.calendar = moment().utc().startOf('day').add(d, 'd').add(h, 'h').toDate();
+      this.calDate.hours = h;
+    }else{
+      this.calendar = moment(this.calendar).utc().add(d, 'd').toDate();
+      document.getElementById('active_days').id = '';
+      if($event.target.nodeName != 'LI'){
+        $event.target.closest('li').id = 'active_days';
+      }else{
+        $event.target.id = 'active_days';
+      }
+    }
+    console.log(this.calendar);
     this.updateMap();
   }
 
   updateMap() {
+    setTimeout(() => {
+        // console.log(this.windJSLeaflet);
+        // this.windJSLeaflet.canvasStatus = !1;
+        // this.windJSLeaflet._destroyWind();
+        // setTimeout(() => {
+        //   this.windJSLeaflet.canvasStatus = !0;
+        //   // this._loadLocalData(this._data);
+        //   this.windJSLeaflet._initWindy(this.windJSLeaflet._data);
+        // }, 1000);
+    }, 60000);
+    console.log('mapUpdated');
     this.loadingStatus = true;
     this.calendarDisabled = true;
 
