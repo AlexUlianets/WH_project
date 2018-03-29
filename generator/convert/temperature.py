@@ -2,13 +2,13 @@ import os
 
 import utils
 from datetime import datetime
-import time
+import calendar
 
 
 class TemperatureConverter:
     def __init__(self, date):
         self.date = date
-        self.dayMillis = time.mktime(datetime.strptime(date, "%Y-%m-%d").timetuple())
+        self.dayMillis = calendar.timegm(datetime.strptime(date, "%Y-%m-%d").timetuple())
 
     def convert(self, cache, points):
         resultConfig = []
