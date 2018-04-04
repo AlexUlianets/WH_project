@@ -71,7 +71,7 @@ export class AppComponent {
   //FIXME
   CanvasLayer: any;
 
-  calendar = moment().utc().startOf('day').toDate();
+  calendar = moment().utc().toDate();
 
 
   calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
