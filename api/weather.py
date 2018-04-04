@@ -7,10 +7,10 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 
 ##for development only
-from content_access import get_image
-from content_access import get_wind
-app.add_url_rule( '/images/<type>/<image>', 'get_image', get_image, methods=['GET'])
-app.add_url_rule( '/images/wind/<wind>', 'get_wind', get_wind, methods=['GET'])
+#from content_access import get_image
+#from content_access import get_wind
+#app.add_url_rule( '/images/<type>/<image>', 'get_image', get_image, methods=['GET'])
+#app.add_url_rule( '/images/wind/<wind>', 'get_wind', get_wind, methods=['GET'])
 ##end of for development
 
 CORS(app)
