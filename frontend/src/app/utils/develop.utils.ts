@@ -4,7 +4,7 @@ export class DevelopUtil {
   /*private static HOST = 'http://35.173.37.26:8888/';*/
   /*private static HOST = 'http://localhost:5000/';*/
 
-  private static HOST = window.location.protocol + '//' + window.location.hostname + ':8888/';
+  private static HOST = 'https://map.worldweatheronline.com:8888/';
 
   public static getHost() {
     return DevelopUtil.HOST;
