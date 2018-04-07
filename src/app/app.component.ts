@@ -72,14 +72,14 @@ export class AppComponent {
   //FIXME
   CanvasLayer: any;
 
-  calendar = moment().utc().toDate();
+  calendar = moment().toDate();
 
 
-  calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
-  calendarMaxDate = moment(this.calendarMinDate).utc().add(4,'d').endOf('day').toDate();
-  // calendar = moment().utc().set({'year': 2016, 'month': 10, 'date': 4}).startOf('day').toDate();
-  // calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
-  // calendarMaxDate = moment(this.calendarMinDate).utc().add(4,'d').endOf('day').toDate();
+  calendarMinDate = moment(this.calendar).startOf('day').toDate();
+  calendarMaxDate = moment(this.calendarMinDate).add(4,'d').endOf('day').toDate();
+  // calendar = moment().set({'year': 2016, 'month': 10, 'date': 4}).startOf('day').toDate();
+  // calendarMinDate = moment(this.calendar).startOf('day').toDate();
+  // calendarMaxDate = moment(this.calendarMinDate).add(4,'d').endOf('day').toDate();
   calendarDisabled = false;
   calendarShowTime = true;
   langRU: any = {
@@ -97,11 +97,11 @@ export class AppComponent {
   calDate: any = {
     hours: parseInt( moment().startOf('hour').format('H') ),
     days: [
-      moment().utc().startOf('day').format('ddd, DD.MM'),
-      moment().utc().add(1,'d').startOf('day').format('ddd, DD.MM'),
-      moment().utc().add(2,'d').startOf('day').format('ddd, DD.MM'),
-      moment().utc().add(3,'d').startOf('day').format('ddd, DD.MM'),
-      moment().utc().add(4,'d').startOf('day').format('ddd, DD.MM')
+      moment().startOf('day').format('ddd, DD.MM'),
+      moment().add(1,'d').startOf('day').format('ddd, DD.MM'),
+      moment().add(2,'d').startOf('day').format('ddd, DD.MM'),
+      moment().add(3,'d').startOf('day').format('ddd, DD.MM'),
+      moment().add(4,'d').startOf('day').format('ddd, DD.MM')
     ],
   };
 
@@ -533,10 +533,10 @@ export class AppComponent {
   applyUpdateMap($event, h, d) {
     $event.preventDefault();
     if(h){
-      this.calendar = moment(this.calendar).utc().startOf('day').add(d, 'd').add(h, 'h').toDate();
+      this.calendar = moment(this.calendar).startOf('day').add(d, 'd').add(h, 'h').toDate();
       this.calDate.hours = h;
     }else{
-      this.calendar = moment().utc().add(d, 'd').set('hour', this.calDate.hours).toDate();
+      this.calendar = moment().add(d, 'd').set('hour', this.calDate.hours).toDate();
       document.getElementById('active_days').id = '';
       if($event.target.nodeName != 'LI'){
         $event.target.closest('li').id = 'active_days';
