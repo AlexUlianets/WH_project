@@ -536,7 +536,7 @@ export class AppComponent {
       this.calendar = moment(this.calendar).startOf('day').add(d, 'd').add(h, 'h').toDate();
       this.calDate.hours = h;
     }else{
-      this.calendar = moment().add(d, 'd').set('hour', this.calDate.hours).toDate();
+      this.calendar = moment().add(d, 'd').startOf('day').set('hour', this.calDate.hours).toDate();
       document.getElementById('active_days').id = '';
       if($event.target.nodeName != 'LI'){
         $event.target.closest('li').id = 'active_days';
@@ -544,7 +544,6 @@ export class AppComponent {
         $event.target.id = 'active_days';
       }
     }
-    console.log(this.calendar);
     this.updateMap();
   }
 
