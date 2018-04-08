@@ -1,9 +1,8 @@
+import calendar
 import os
+from datetime import datetime
 
 import utils
-from datetime import datetime
-import calendar
-
 
 class TemperatureConverter:
     def __init__(self, date):
@@ -22,7 +21,7 @@ class TemperatureConverter:
                     value = self.__interpolate(cache.web[x][y], points, time)
                     matrix[x].append(int(value))
             timestamp = int(hour * 60 * 60 + self.dayMillis)
-            name = self.date + '_' + str(timestamp)
+            name = self.date + '_' + str(timestamp) + '_' + utils.get_generation_timestamp()
             path = os.path.join('temperature', name)
             utils.generate_image(matrix, path)
             hour += 1

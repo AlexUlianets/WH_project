@@ -1,4 +1,5 @@
 import gzip
+import time
 import urllib2
 from math import sin, cos, sqrt, atan2, degrees, asin, pi
 
@@ -39,6 +40,11 @@ TIMES = [
     '2200',
     '2300'
 ]
+
+generation_timestamp = str(int(time.time()))  # type: str
+
+def get_generation_timestamp():
+    return generation_timestamp
 
 
 def frange(x, y, jump):

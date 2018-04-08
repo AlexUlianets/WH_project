@@ -6,13 +6,6 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 
-##for development only
-#from content_access import get_image
-#from content_access import get_wind
-#app.add_url_rule( '/images/<type>/<image>', 'get_image', get_image, methods=['GET'])
-#app.add_url_rule( '/images/wind/<wind>', 'get_wind', get_wind, methods=['GET'])
-##end of for development
-
 CORS(app)
 mysql = MySQL()
 
@@ -23,6 +16,14 @@ app.config['MYSQL_DATABASE_DB'] = DB.MYSQL_DB
 app.config['MYSQL_DATABASE_HOST'] = DB.MYSQL_HOST
 mysql.init_app(app)
 
+#@app.after_request
+#def set_response_headers(response):
+#    path = request.path
+#    if path == '/api/weather':
+#        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+#        response.headers['Pragma'] = 'no-cache'
+#        response.headers['Expires'] = '0'
+#    return response
 
 @app.route('/api/weather', methods=['GET'])
 def image():
@@ -41,11 +42,6 @@ def image():
         wind = 'images/wind/' + data[0] + '.json'
         return jsonify({'path': path, 'wind': wind})
     else:
-        ##test only
-        #path = 'images/clouds/clouds.png'
-        #wind = 'images/wind/wind.json'
-        #return jsonify({'path': path, 'wind': wind})
-        #test end
         return jsonify({})
 
 if __name__ == "__main__":

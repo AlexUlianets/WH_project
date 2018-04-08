@@ -20,7 +20,7 @@ class CloudConverter:
                     cloud = self.interpolate_clouds(cache.web[x][y], points, time)
                     clouds[x].append(int(cloud))
             timestamp = int(hour * 60 * 60 + self.dayMillis)
-            name = self.date + '_' + str(timestamp)
+            name = self.date + '_' + str(timestamp) + '_' + utils.get_generation_timestamp()
             path = os.path.join('clouds', name)
             utils.generate_image(clouds, path)
             hour += 1

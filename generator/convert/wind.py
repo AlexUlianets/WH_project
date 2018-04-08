@@ -51,7 +51,7 @@ class WindConverter:
                 v.append(0)
 
             timestamp = int(hour * 60 * 60 + self.dayMillis)
-            name = self.date + '_' + str(timestamp)
+            name = self.date + '_' + str(timestamp) + '_' + utils.get_generation_timestamp()
 
             # u1 = u
             # v1 = v

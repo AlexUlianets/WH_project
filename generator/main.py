@@ -14,6 +14,8 @@ import DB
 
 startTime = time.time()
 
+print 'main generation time stamp : ' + utils.generation_timestamp
+
 #filename = '/home/ubuntu/maps_app/generator/data/weather.csv'
 #zip_filename = '/home/ubuntu/maps_app/generator/data/wwo-data.csv.gz'
 

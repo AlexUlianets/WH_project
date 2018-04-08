@@ -21,7 +21,7 @@ class PrecipitationConverter:
         resultConfig = []
         for time in utils.TIMES:
             timestamp = int(hour * 60 * 60 + self.dayMillis)
-            name = self.date + '_' + str(timestamp)
+            name = self.date + '_' + str(timestamp) + '_' + utils.get_generation_timestamp()
             path = os.path.join('precipitations', name)
             utils.generate_image(precipitations, path)
             hour += 1
