@@ -72,14 +72,14 @@ export class AppComponent {
   //FIXME
   CanvasLayer: any;
 
-  calendar = moment().utc().toDate();
+  calendar = moment().toDate();
 
 
-  calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
-  calendarMaxDate = moment(this.calendarMinDate).utc().add(4,'d').endOf('day').toDate();
-  // calendar = moment().utc().set({'year': 2016, 'month': 10, 'date': 4}).startOf('day').toDate();
-  // calendarMinDate = moment(this.calendar).utc().startOf('day').toDate();
-  // calendarMaxDate = moment(this.calendarMinDate).utc().add(4,'d').endOf('day').toDate();
+  calendarMinDate = moment(this.calendar).startOf('day').toDate();
+  calendarMaxDate = moment(this.calendarMinDate).add(4,'d').endOf('day').toDate();
+  // calendar = moment().set({'year': 2016, 'month': 10, 'date': 4}).startOf('day').toDate();
+  // calendarMinDate = moment(this.calendar).startOf('day').toDate();
+  // calendarMaxDate = moment(this.calendarMinDate).add(4,'d').endOf('day').toDate();
   calendarDisabled = false;
   calendarShowTime = true;
   langRU: any = {
@@ -97,20 +97,20 @@ export class AppComponent {
   calDate: any = {
     hours: parseInt( moment().startOf('hour').format('H') ),
     days: [
-      moment(this.calendar).utc().startOf('day').format('ddd, DD.MM'),
-      moment(this.calendar).utc().add(1,'d').startOf('day').format('ddd, DD.MM'),
-      moment(this.calendar).utc().add(2,'d').startOf('day').format('ddd, DD.MM'),
-      moment(this.calendar).utc().add(3,'d').startOf('day').format('ddd, DD.MM'),
-      moment(this.calendar).utc().add(4,'d').startOf('day').format('ddd, DD.MM')
+      moment().startOf('day').format('ddd, DD.MM'),
+      moment().add(1,'d').startOf('day').format('ddd, DD.MM'),
+      moment().add(2,'d').startOf('day').format('ddd, DD.MM'),
+      moment().add(3,'d').startOf('day').format('ddd, DD.MM'),
+      moment().add(4,'d').startOf('day').format('ddd, DD.MM')
     ],
   };
 
   constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService, private meta: Meta) {
-  this.meta.addTag({property: 'og:image', content: 'assets/images/world_weather_online.jpg'});
-  this.meta.addTag({name: 'title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
-  this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
-  this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
-  this.meta.addTag({name: 'og:description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
+    this.meta.addTag({property: 'og:image', content: 'assets/images/world_weather_online.jpg'});
+    this.meta.addTag({name: 'title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
+    this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
+    this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
+    this.meta.addTag({name: 'og:description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
   }
 
   ngOnInit() {
@@ -533,10 +533,10 @@ export class AppComponent {
   applyUpdateMap($event, h, d) {
     $event.preventDefault();
     if(h){
-      this.calendar = moment().utc().startOf('day').add(d, 'd').add(h, 'h').toDate();
+      this.calendar = moment(this.calendar).startOf('day').add(d, 'd').add(h, 'h').toDate();
       this.calDate.hours = h;
     }else{
-      this.calendar = moment(this.calendar).utc().add(d, 'd').toDate();
+      this.calendar = moment().add(d, 'd').set('hour', this.calDate.hours).toDate();
       document.getElementById('active_days').id = '';
       if($event.target.nodeName != 'LI'){
         $event.target.closest('li').id = 'active_days';
@@ -549,17 +549,6 @@ export class AppComponent {
   }
 
   updateMap() {
-    setTimeout(() => {
-        // console.log(this.windJSLeaflet);
-        // this.windJSLeaflet.canvasStatus = !1;
-        // this.windJSLeaflet._destroyWind();
-        // setTimeout(() => {
-        //   this.windJSLeaflet.canvasStatus = !0;
-        //   // this._loadLocalData(this._data);
-        //   this.windJSLeaflet._initWindy(this.windJSLeaflet._data);
-        // }, 1000);
-    }, 60000);
-    console.log('mapUpdated');
     this.loadingStatus = true;
     this.calendarDisabled = true;
 
