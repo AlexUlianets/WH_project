@@ -59,6 +59,7 @@ export class AppComponent {
 
   refPointsCache = [];
   tileColorCache = [];
+  qualifiedTimestamp = '';
 
   zoomed = false;
   shouldBeLoaded = 0;
@@ -364,7 +365,7 @@ export class AppComponent {
     let absolutePixelX = pixelLeftTop.x + this.screenOffsetX;
     let absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
 
-    const cacheKey = this.currentFilter + '_' + absolutePixelX + '_' + absolutePixelY + '_' + this.step;
+    const cacheKey = this.currentFilter + '_' + this.qualifiedTimestamp + '_' + absolutePixelX + '_' + absolutePixelY + '_' + this.step;
 
     if (!(this.tileColorCache[this.currentZoom] === undefined) && !(this.tileColorCache[this.currentZoom][cacheKey] === undefined)) {
       canvasData = this.tileColorCache[this.currentZoom][cacheKey];
@@ -459,7 +460,7 @@ export class AppComponent {
     let startLineX = leftLine - 2 * this.step;
     let startLineY = topLine - 2 * this.step;
 
-    const cacheKey = this.currentFilter + '_' + startLineX + '_' + finishLineX + '_' + startLineY + '_' + finishLineY + '_' + this.step;
+    const cacheKey = this.currentFilter + '_' + this.qualifiedTimestamp + '_' + startLineX + '_' + finishLineX + '_' + startLineY + '_' + finishLineY + '_' + this.step;
 
     if (!(this.refPointsCache[this.currentZoom] === undefined) && !(this.refPointsCache[this.currentZoom][cacheKey] === undefined)) {
         return this.refPointsCache[this.currentZoom][cacheKey];
@@ -593,9 +594,12 @@ export class AppComponent {
       success => {
         if (success) {
           if(success.json()) {
-            let imgPath = success.json().path;
-            let windPath = success.json().wind;
+            let imgPath : string = success.json().path;
+            let windPath : string = success.json().wind;
             this.windStateService.triggerWindPathStatus({path: DevelopUtil.url(windPath)});
+            const startIdx = imgPath.indexOf('_') + 1;
+            const finishIdx = imgPath.lastIndexOf('.');
+            this.qualifiedTimestamp = imgPath.substring(startIdx, finishIdx);
             this.show(DevelopUtil.url(imgPath));
           }
           this.loadingStatus = false;
