@@ -76,8 +76,7 @@ export class AppComponent {
   //FIXME
   CanvasLayer: any;
 
-  calendar = moment().toDate();
-
+  calendar = moment().startOf('hour').toDate();
 
   calendarMinDate = moment(this.calendar).startOf('day').toDate();
   calendarMaxDate = moment(this.calendarMinDate).add(4,'d').endOf('day').toDate();
