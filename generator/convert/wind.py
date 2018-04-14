@@ -1,4 +1,6 @@
 from datetime import datetime
+from datetime import timedelta
+
 import json
 import os
 import calendar
@@ -13,7 +15,7 @@ import utils
 class WindConverter:
     def __init__(self, date):
         self.date = date
-        self.dayMillis = calendar.timegm(datetime.strptime(date, "%Y-%m-%d").timetuple())
+        self.dayMillis = calendar.timegm((datetime.strptime(date, "%Y-%m-%d") - timedelta(hours = 3)).timetuple())
 
     def convert(self, cache, points):
         resultConfig = []
