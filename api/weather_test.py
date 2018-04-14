@@ -1,3 +1,4 @@
+# this is a API test endpoint
 import weather
 
 from content_access import get_image
