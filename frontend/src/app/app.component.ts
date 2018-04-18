@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
 import * as L from 'leaflet';
 import * as $ from 'jquery';
 import * as moment from 'moment';
@@ -108,12 +107,7 @@ export class AppComponent {
     ],
   };
 
-  constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService, private meta: Meta) {
-    this.meta.addTag({property: 'og:image', content: window.location.href + 'assets/images/world_weather_online.jpg'});
-    this.meta.addTag({name: 'title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
-    this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
-    this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
-    this.meta.addTag({name: 'og:description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
+  constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService) {
   }
 
   ngOnInit() {
@@ -127,7 +121,8 @@ export class AppComponent {
       minZoom: this.minZoom,
       maxZoom: this.maxZoom,
       maxBounds: bounds,
-      maxBoundsViscosity: 1.0
+      maxBoundsViscosity: 1.0,
+      preferCanvas: true
     });
     this.map.zoomControl.setPosition('topleft');
 
