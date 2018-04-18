@@ -119,8 +119,7 @@ export class AppComponent {
       maxZoom: this.maxZoom,
       maxBounds: bounds,
       maxBoundsViscosity: 1.0,
-      preferCanvas: true,
-      zoomDelta: 0.3
+      preferCanvas: true
     });
     this.map.zoomControl.setPosition('topleft');
 
