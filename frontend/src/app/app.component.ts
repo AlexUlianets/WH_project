@@ -109,7 +109,7 @@ export class AppComponent {
   };
 
   constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService, private meta: Meta) {
-    this.meta.addTag({property: 'og:image', content: 'assets/images/world_weather_online.jpg'});
+    this.meta.addTag({property: 'og:image', content: window.location.href + 'assets/images/world_weather_online.jpg'});
     this.meta.addTag({name: 'title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
     this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
     this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
