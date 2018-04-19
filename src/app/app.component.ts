@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import * as L from 'leaflet';
 import * as $ from 'jquery';
 import * as moment from 'moment';
