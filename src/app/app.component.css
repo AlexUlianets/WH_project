@@ -850,3 +850,19 @@
 #pHoursTop .uv_color_11 {
   background: #4b2b51;
 }
+
+
+
+.share-btn{
+  position: absolute;
+  bottom: 90px;
+  right: 25px;
+  border-radius: 50%;
+  padding: 10px 10px;
+  z-index: 1000;
+  background-color: #9fc920;
+  border: 0;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

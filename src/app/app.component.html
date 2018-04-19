@@ -4,7 +4,15 @@
     <input (change)="filterSelected($event.target.value)" [value]="filter.value" name="filter" type="radio">
   </label>
 </div> -->
-
+  <button (click)="shareFB()" class="share-btn">
+    FB
+  </button>
+ <!--  <button (click)="shareTW()" class="btn btn-lg btn-primary btn-block">
+    Share to TW
+  </button>
+  <button (click)="shareGoogle()" class="btn btn-lg btn-primary btn-block">
+    Share to Google
+  </button> -->
 <div wth-cursor-dialog id="lmap"></div>
 <div id="cursor-dialog-box">{{mouseTemperature}} <span *ngIf="currentFilter === 'temperature'">&deg;C</span><span *ngIf="currentFilter === 'clouds'">%</span><span *ngIf="currentFilter === 'precipitations'">мм</span></div>
 
