@@ -202,7 +202,8 @@ export class AppComponent {
       weight: 0.3,
       color: '#555',
       fillColor: '#555',
-      fillOpacity: 0.1,
+      opacity: '0.3',
+      fillOpacity: 0.01,
     };
     //let bordersLayer = L.geoJSON(borders);
     let bordersLayer = L.geoJSON((borders as any));
