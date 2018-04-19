@@ -11,6 +11,11 @@ import { borders } from './borders';
 import { MapDataHttpService } from './services/http/map.data.http.service';
 import { DevelopUtil } from './utils/develop.utils';
 import { WindStateService } from './wind/wind.state.service';
+import { Http } from '@angular/http';
+
+import { FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBVideoComponent } from 'ngx-facebook';
+import * as domtoimage from 'dom-to-image';
+
 
 @Component({
   selector: 'app-root',
@@ -19,6 +24,7 @@ import { WindStateService } from './wind/wind.state.service';
   providers: [CanvasLayer, WindJSLeaflet, WindStateService]
 })
 export class AppComponent {
+
   map: any;
   step: any;
   dbl: any;
@@ -104,8 +110,62 @@ export class AppComponent {
     ],
   };
 
-  constructor(private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService) {
+  constructor(private http: Http, private fb: FacebookService, private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService, private meta: Meta) {
+  this.meta.addTag({property: 'og:image', content: 'assets/images/world_weather_online.jpg'});
+  this.meta.addTag({name: 'title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
+  this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
+  this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
+  this.meta.addTag({name: 'og:description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
+      console.log('Initializing Facebook');
+      fb.init({
+        appId: '542910476109937',
+        version: 'v2.9'
+      });
   }
+
+    shareFB() {
+      this.screenIt().then(imageNum => {
+
+        const options: UIParams = {
+          method: 'share_open_graph',
+          action_type: 'og.shares',
+          action_properties: JSON.stringify({
+              object : {
+                 'og:url': 'http://localhost:3030',
+                 'og:title': 'title',
+                 'og:description': 'desc',
+                 'og:image': 'http://18.221.71.184:3000/image/'+imageNum
+                }
+          })
+        };
+        this.fb.ui(options)
+          .then((res: UIResponse) => {
+            console.log('Got the users profile', res);
+          })
+          .catch(function (err) {
+            console.log('handleError...');
+            console.log(err);
+          });
+
+      })
+    }
+    screenIt() {
+      return new Promise((resolve, reject) => {  
+        domtoimage.toPng(document.body)
+        .then ((dataUrl) => {
+            var img = new Image();
+            img.src = dataUrl;
+            document.body.appendChild(img);
+            this.http.post('http://18.221.71.184:3000/image', {data: img.src})
+            .subscribe((data) => resolve(data.text()));
+
+        })
+        .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
+      });
+    }
+
 
   ngOnInit() {
     this.colorList = this.colorService.getColorList();
@@ -139,10 +199,11 @@ export class AppComponent {
     });
 
     let myStyle = {
-      weight: 1,
+      weight: 0.3,
       color: '#555',
       fillColor: '#555',
-      fillOpacity: 0.1,
+      opacity: '0.3',
+      fillOpacity: 0.01,
     };
     //let bordersLayer = L.geoJSON(borders);
     let bordersLayer = L.geoJSON((borders as any));
@@ -531,7 +592,7 @@ export class AppComponent {
       this.calendar = moment(this.calendar).startOf('day').add(d, 'd').add(h, 'h').toDate();
       this.calDate.hours = h;
     }else{
-      this.calendar = moment().add(d, 'd').set('hour', this.calDate.hours).toDate();
+      this.calendar = moment().add(d, 'd').startOf('day').set('hour', this.calDate.hours).toDate();
       document.getElementById('active_days').id = '';
       if($event.target.nodeName != 'LI'){
         $event.target.closest('li').id = 'active_days';
@@ -539,7 +600,6 @@ export class AppComponent {
         $event.target.id = 'active_days';
       }
     }
-    console.log(this.calendar);
     this.updateMap();
   }
 
