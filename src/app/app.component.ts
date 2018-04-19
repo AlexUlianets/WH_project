@@ -199,7 +199,7 @@ export class AppComponent {
     });
 
     let myStyle = {
-      weight: 1,
+      weight: 0.3,
       color: '#555',
       fillColor: '#555',
       fillOpacity: 0.1,
