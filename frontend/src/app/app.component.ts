@@ -136,7 +136,9 @@ export class AppComponent {
                  'og:url': 'http://localhost:3030',
                  'og:title': 'World Weather Map - Interactive weather map. Worldweatheronline',
                  'og:description': 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map',
-                 'og:image': 'http://18.221.71.184:3000/image/'+imageNum
+                 'og:image': 'http://18.221.71.184:3000/image/'+imageNum,
+                 'og:image:width': 300,
+                 'og:image:height': 400
                 }
           })
         };
@@ -154,7 +156,7 @@ export class AppComponent {
       })
     }
     screenIt() {
-      return new Promise((resolve, reject) => {  
+      return new Promise((resolve, reject) => {
         domtoimage.toPng(document.querySelector('.leaflet-pane.leaflet-map-pane'), {height: window.innerHeight, width: window.innerWidth})
         .then ((dataUrl) => {
             var img = new Image();
