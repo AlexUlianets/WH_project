@@ -10,6 +10,6 @@ html, body {
   display: none;
 }
 .leaflet-tile-container img{
-  filter: brightness(100%) !important;
-  opacity: 0.9 !important;
+  filter: brightness(60%) !important;
+  opacity: 0.2 !important;
 }

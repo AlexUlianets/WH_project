@@ -196,17 +196,18 @@ export class AppComponent {
       }
     });
 
-    this.tileLayer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    this.tileLayer = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_only_labels/{z}/{x}/{y}.png', {
       attribution: '',
       subdomains: 'abcd',
       zIndex: 2,
     });
 
     let myStyle = {
-      weight: 1,
-      color: '#444444',
-      fillColor: '#444444',
-      opacity: '1'
+      weight: 0.3,
+      color: '#555',
+      fillColor: '#555',
+      opacity: '0.3',
+      fillOpacity: 0.01,
     };
     //let bordersLayer = L.geoJSON(borders);
     let bordersLayer = L.geoJSON((borders as any));
