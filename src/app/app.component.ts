@@ -63,6 +63,10 @@ export class AppComponent {
   distanceCache = {};
   tilesForColorize = [];
 
+  refPointsCache = [];
+  tileColorCache = [];
+  qualifiedTimestamp = '';
+
   zoomed = false;
   shouldBeLoaded = 0;
 
@@ -78,8 +82,7 @@ export class AppComponent {
   //FIXME
   CanvasLayer: any;
 
-  calendar = moment().toDate();
-
+  calendar = moment().startOf('hour').toDate();
 
   calendarMinDate = moment(this.calendar).startOf('day').toDate();
   calendarMaxDate = moment(this.calendarMinDate).add(4,'d').endOf('day').toDate();
@@ -151,7 +154,7 @@ export class AppComponent {
       })
     }
     screenIt() {
-      return new Promise((resolve, reject) => {  
+      return new Promise((resolve, reject) => {
         domtoimage.toPng(document.body)
         .then ((dataUrl) => {
             var img = new Image();
@@ -303,6 +306,7 @@ export class AppComponent {
       this.colorizeTiles();
 
       this.map.on('zoomstart', function () {
+        /*this.start = Date.now();*/
         self.zoomed = true;
         $("#cursor-dialog-box").css({top: 0, left: 0}).hide();
       });
@@ -310,6 +314,7 @@ export class AppComponent {
       this.map.on('zoomend', function () {
         self.zoomed = false;
 
+        self.currentZoom = self.map.getZoom();
         let config = self.zoomConfigs[self.currentZoom];
         if (self.step != config.step) {
           self.step = config.step;
@@ -321,12 +326,14 @@ export class AppComponent {
         self.groupLayers.removeLayer(self.canvasTiles);
         self.canvasTiles = new self.CanvasLayer();
         self.groupLayers.addLayer(self.canvasTiles);
-        self.currentZoom = self.map.getZoom();
+        /*self.currentZoom = self.map.getZoom();*/
 
         self.tiles = self.canvasTiles._tiles;
         self.refPoints = self.getRefPoints(self.imageData);
         self.colorizeTiles();
         self.loadingStatus = false;
+        /*const finish = Date.now() - this.start;
+        console.log('finish zoom : ' + (finish));*/
       });
 
       // this.map.on('moveend', function () {
@@ -355,7 +362,9 @@ export class AppComponent {
 
       this.tileLayer.on('load', function (event) {
         self.tiles = self.canvasTiles._tiles;
-        self.refPoints = self.getRefPoints(self.imageData);
+        if (self.tilesForColorize.length > 0 ) {
+          self.refPoints = self.getRefPoints(self.imageData);
+        }
         for (let colorizeTile of self.tilesForColorize) {
           for (let item in self.tiles) {
             let currentTile = self.tiles[item];
@@ -411,6 +420,15 @@ export class AppComponent {
     let temperature;
     let absolutePixelX = pixelLeftTop.x + this.screenOffsetX;
     let absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
+
+    const cacheKey = this.currentFilter + '_' + this.qualifiedTimestamp + '_' + absolutePixelX + '_' + absolutePixelY + '_' + this.step;
+
+    if (!(this.tileColorCache[this.currentZoom] === undefined) && !(this.tileColorCache[this.currentZoom][cacheKey] === undefined)) {
+      canvasData = this.tileColorCache[this.currentZoom][cacheKey];
+      context.putImageData(canvasData, 0, 0);
+      return;
+    };
+
     for (let pixelX = 0; pixelX < this.canvasWidth; ++pixelX) {
       let leftLine = ((absolutePixelX / this.step) << 0) * this.step;
       let refX = absolutePixelX - leftLine;
@@ -449,6 +467,10 @@ export class AppComponent {
       ++absolutePixelX;
       absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
     }
+    if ( this.tileColorCache[this.currentZoom] === undefined){
+      this.tileColorCache[this.currentZoom] = [];
+    }
+    this.tileColorCache[this.currentZoom][cacheKey] = canvasData;
     context.putImageData(canvasData, 0, 0);
   }
 
@@ -493,6 +515,13 @@ export class AppComponent {
     let finishLineY = bottomLine + 3 * this.step;
     let startLineX = leftLine - 2 * this.step;
     let startLineY = topLine - 2 * this.step;
+
+    const cacheKey = this.currentFilter + '_' + this.qualifiedTimestamp + '_' + startLineX + '_' + finishLineX + '_' + startLineY + '_' + finishLineY + '_' + this.step;
+
+    if (!(this.refPointsCache[this.currentZoom] === undefined) && !(this.refPointsCache[this.currentZoom][cacheKey] === undefined)) {
+        return this.refPointsCache[this.currentZoom][cacheKey];
+    };
+
     for (let verticalLine = startLineX; verticalLine <= finishLineX; verticalLine += this.step) {
       refs[verticalLine] = {};
       for (let horizontalLine = startLineY; horizontalLine <= finishLineY; horizontalLine += this.step) {
@@ -506,6 +535,10 @@ export class AppComponent {
         refs[verticalLine][horizontalLine] = imageData.data[imageScope] - 150;
       }
     }
+    if ( this.refPointsCache[this.currentZoom] === undefined){
+      this.refPointsCache[this.currentZoom] = [];
+    }
+    this.refPointsCache[this.currentZoom][cacheKey] = refs;
     return refs;
   }
 
@@ -616,9 +649,12 @@ export class AppComponent {
       success => {
         if (success) {
           if(success.json()) {
-            let imgPath = success.json().path;
-            let windPath = success.json().wind;
+            let imgPath : string = success.json().path;
+            let windPath : string = success.json().wind;
             this.windStateService.triggerWindPathStatus({path: DevelopUtil.url(windPath)});
+            const startIdx = imgPath.indexOf('_') + 1;
+            const finishIdx = imgPath.lastIndexOf('.');
+            this.qualifiedTimestamp = imgPath.substring(startIdx, finishIdx);
             this.show(DevelopUtil.url(imgPath));
           }
           this.loadingStatus = false;
