@@ -125,6 +125,7 @@ export class AppComponent {
   }
 
     shareFB() {
+      this.loadingStatus = true;
       this.screenIt().then(imageNum => {
 
         const options: UIParams = {
@@ -141,9 +142,11 @@ export class AppComponent {
         };
         this.fb.ui(options)
           .then((res: UIResponse) => {
+            this.loadingStatus = false;
             console.log('Got the users profile', res);
           })
-          .catch(function (err) {
+          .catch((err) => {
+            this.loadingStatus = false;
             console.log('handleError...');
             console.log(err);
           });
@@ -161,7 +164,8 @@ export class AppComponent {
             .subscribe((data) => resolve(data.text()));
 
         })
-        .catch(function (error) {
+        .catch((error) => {
+            this.loadingStatus = false;
             console.error('oops, something went wrong!', error);
         });
       });
@@ -200,10 +204,10 @@ export class AppComponent {
     });
 
     let myStyle = {
-      weight: 0.3,
+      weight: 1,
       color: '#555',
       fillColor: '#555',
-      opacity: '0.3',
+      // opacity: '0.3',
       fillOpacity: 0.01,
     };
     //let bordersLayer = L.geoJSON(borders);
