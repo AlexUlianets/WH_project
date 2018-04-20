@@ -9,7 +9,7 @@ html, body {
 .leaflet-control-attribution {
   display: none;
 }
-.leaflet-tile-container img{
+/*.leaflet-tile-container img{
   filter: brightness(60%) !important;
   opacity: 0.2 !important;
-}
+}*/
