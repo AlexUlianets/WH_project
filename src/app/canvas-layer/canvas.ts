@@ -128,7 +128,7 @@ export class CanvasLayer extends L.Layer {
     del.onDrawLayer && del.onDrawLayer( {
       layer : this,
       canvas: this._canvas,
-      bounds: bounds,
+      // bounds: bounds,
       size: size,
       zoom: zoom,
       center : center,

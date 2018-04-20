@@ -13,6 +13,9 @@ import { HsvColorService } from './services/hsl.color.service';
 import { RgbColorService } from "./services/rgb.color.service";
 import { MapDataHttpService } from './services/http/map.data.http.service';
 
+import { FacebookModule } from 'ngx-facebook';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { MapDataHttpService } from './services/http/map.data.http.service';
     HttpModule,
     FormsModule,
     CalendarModule,
+    FacebookModule.forRoot()
   ],
   providers: [
     ColorService,
