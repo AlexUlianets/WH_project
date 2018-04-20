@@ -133,8 +133,8 @@ export class AppComponent {
           action_properties: JSON.stringify({
               object : {
                  'og:url': 'http://localhost:3030',
-                 'og:title': 'title',
-                 'og:description': 'desc',
+                 'og:title': 'World Weather Map - Interactive weather map. Worldweatheronline',
+                 'og:description': 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map',
                  'og:image': 'http://18.221.71.184:3000/image/'+imageNum
                 }
           })
@@ -152,7 +152,7 @@ export class AppComponent {
     }
     screenIt() {
       return new Promise((resolve, reject) => {  
-        domtoimage.toPng(document.body)
+        domtoimage.toPng(document.querySelector('.leaflet-pane.leaflet-map-pane'), {height: window.innerHeight, width: window.innerWidth})
         .then ((dataUrl) => {
             var img = new Image();
             img.src = dataUrl;
