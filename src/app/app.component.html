@@ -66,7 +66,7 @@
       </div>
     </div> -->
 
-    <div id="slider_range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips">
+    <div id="slider_range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips" [ngStyle]="{'display': currentFilter=='precipitations'?'none':'block'}">
       <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" [style.left.%]="calDate.hours*4.3478"></span>
       <span class="ui-slider-pip ui-slider-pip-first ui-slider-pip-hide ui-slider-pip-0" style="left: 0%" (click)="applyUpdateMap($event, '0', '0')"><span class="ui-slider-line"></span>
       <span class="ui-slider-label" data-value="0">0:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-1" style="left: 4.3478%" (click)="applyUpdateMap($event, '1', '0')"><span class="ui-slider-line"></span>
