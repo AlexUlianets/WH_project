@@ -6,7 +6,7 @@ import { ColorService } from './services/color.service';
 import { CanvasLayer } from './canvas-layer/canvas';
 import { WindJSLeaflet } from './wind/wind';
 import TileEvent = L.TileEvent;
-import { ColorConfig, RgbColorService } from "./services/rgb.color.service";
+import { ColorConfig, RgbColorService } from './services/rgb.color.service';
 import { borders } from './borders';
 import { MapDataHttpService } from './services/http/map.data.http.service';
 import { DevelopUtil } from './utils/develop.utils';
@@ -139,7 +139,7 @@ export class AppComponent {
     });
 
     let myStyle = {
-      weight: 1,
+      weight: 0.3,
       color: '#555',
       fillColor: '#555',
       fillOpacity: 0.1,
