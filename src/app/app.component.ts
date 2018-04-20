@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
 import * as L from 'leaflet';
 import * as $ from 'jquery';
 import * as moment from 'moment';
@@ -179,7 +178,8 @@ export class AppComponent {
       minZoom: this.minZoom,
       maxZoom: this.maxZoom,
       maxBounds: bounds,
-      maxBoundsViscosity: 1.0
+      maxBoundsViscosity: 1.0,
+      preferCanvas: true
     });
     this.map.zoomControl.setPosition('topleft');
 
