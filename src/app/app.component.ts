@@ -14,8 +14,8 @@ import { DevelopUtil } from './utils/develop.utils';
 import { WindStateService } from './wind/wind.state.service';
 import { Http } from '@angular/http';
 
-import { FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBVideoComponent } from 'ngx-facebook';
 import * as domtoimage from 'dom-to-image';
+import * as FileSaver from 'file-saver';
 
 
 @Component({
@@ -111,66 +111,47 @@ export class AppComponent {
     ],
   };
 
-  constructor(private http: Http, private fb: FacebookService, private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService, private meta: Meta) {
+  constructor(private http: Http, private colorService: ColorService, private windJSLeaflet: WindJSLeaflet, private hsvColorService: RgbColorService, private mapDataHttpService: MapDataHttpService, private windStateService: WindStateService, private meta: Meta) {
   this.meta.addTag({property: 'og:image', content: 'assets/images/world_weather_online.jpg'});
   this.meta.addTag({name: 'title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
   this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
   this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
   this.meta.addTag({name: 'og:description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
-      console.log('Initializing Facebook');
-      fb.init({
-        appId: '542910476109937',
-        version: 'v2.9'
-      });
   }
 
-    shareFB() {
-      this.loadingStatus = true;
-      this.screenIt().then(imageNum => {
-
-        const options: UIParams = {
-          method: 'share_open_graph',
-          action_type: 'og.shares',
-          action_properties: JSON.stringify({
-              object : {
-                 'og:url': 'http://localhost:3030',
-                 'og:title': 'World Weather Map - Interactive weather map. Worldweatheronline',
-                 'og:description': 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map',
-                 'og:image': 'http://18.221.71.184:3000/image/'+imageNum
-                }
-          })
-        };
-        this.fb.ui(options)
-          .then((res: UIResponse) => {
+  openURLInPopup(url, width, height, popup?) {
+      var newwindow = window.open(url, popup || 'window' + Math.floor(Math.random() * 10000 + 1), 'width='+width+', height='+height); 
+      if (window.focus) {newwindow.focus()}
+  }
+  share2(net) {
+    switch (net) {
+      case 'F': {
+          this.openURLInPopup('http://www.facebook.com/sharer.php?u=https://stackoverflow.com', 600, 400);
+          break;
+      }
+      case 'T': {
+          this.openURLInPopup('http://twitter.com/home?status=https://stackoverflow.com', 600, 400);
+          break;
+      }
+      case 'G': {
+          this.openURLInPopup('https://plus.google.com/share?url=https://stackoverflow.com', 600, 400);
+          break;
+      }
+      case 'screenShot': {
+          this.loadingStatus = true;
+          domtoimage.toBlob(document.querySelector('.leaflet-pane.leaflet-map-pane'), { height: window.innerHeight, width: window.innerWidth })
+          .then((blob) => {
+            FileSaver.saveAs(blob, "map.png");
             this.loadingStatus = false;
-            console.log('Got the users profile', res);
           })
-          .catch((err) => {
-            this.loadingStatus = false;
-            console.log('handleError...');
-            console.log(err);
-          });
-
-      })
-    }
-    screenIt() {
-      return new Promise((resolve, reject) => {  
-        domtoimage.toPng(document.querySelector('.leaflet-pane.leaflet-map-pane'), {height: window.innerHeight, width: window.innerWidth})
-        .then ((dataUrl) => {
-            var img = new Image();
-            img.src = dataUrl;
-            document.body.appendChild(img);
-            this.http.post('http://18.221.71.184:3000/image', {data: img.src})
-            .subscribe((data) => resolve(data.text()));
-
-        })
-        .catch((error) => {
+          .catch((error) => {
             this.loadingStatus = false;
             console.error('oops, something went wrong!', error);
-        });
-      });
+          });
+          break;
+      }
     }
-
+  } 
 
   ngOnInit() {
     this.colorList = this.colorService.getColorList();
