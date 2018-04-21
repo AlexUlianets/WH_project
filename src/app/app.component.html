@@ -4,9 +4,26 @@
     <input (change)="filterSelected($event.target.value)" [value]="filter.value" name="filter" type="radio">
   </label>
 </div> -->
-  <button (click)="shareFB()" class="share-btn">
-    FB
-  </button>
+
+  <div class="shareButtons">
+    <button (click)="share2('screenShot')">
+      <img src="/assets/images/svg/share-option.svg">
+    </button>
+    <div>
+      <button (click)="share2('T')">
+        <img src="/assets/images/svg/twitter-logo-silhouette.svg">
+      </button>
+      <button (click)="share2('F')">
+        <img src="/assets/images/svg/facebook-letter-logo.svg">
+      </button>
+      <button (click)="share2('G')">
+        <img src="/assets/images/svg/google-plus-logo-button.svg">
+      </button>
+      <button (click)="share2('screenShot')">
+        <img src="/assets/images/svg/picture.svg">
+      </button>
+    </div>
+  </div>
  <!--  <button (click)="shareTW()" class="btn btn-lg btn-primary btn-block">
     Share to TW
   </button>
