@@ -126,15 +126,15 @@ export class AppComponent {
   share2(net) {
     switch (net) {
       case 'F': {
-          this.openURLInPopup('http://www.facebook.com/sharer.php?u=https://map.worldweatheronline.com', 600, 400);
+          this.openURLInPopup('http://www.facebook.com/sharer.php?u=' + window.location.protocol + '//' + window.location.hostname, 600, 400);
           break;
       }
       case 'T': {
-          this.openURLInPopup('http://twitter.com/home?status=https://map.worldweatheronline.com', 600, 400);
+          this.openURLInPopup('http://twitter.com/home?status=' + window.location.protocol + '//' + window.location.hostname, 600, 400);
           break;
       }
       case 'G': {
-          this.openURLInPopup('https://plus.google.com/share?url=https://map.worldweatheronline.com', 600, 400);
+          this.openURLInPopup('https://plus.google.com/share?url=' + window.location.protocol + '//' + window.location.hostname, 600, 400);
           break;
       }
       case 'screenShot': {
