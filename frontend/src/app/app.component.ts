@@ -120,7 +120,7 @@ export class AppComponent {
   }
 
   openURLInPopup(url, width, height, popup?) {
-      var newwindow = window.open(url, popup || 'window' + Math.floor(Math.random() * 10000 + 1), 'width='+width+', height='+height); 
+      var newwindow = window.open(url, popup || 'window' + Math.floor(Math.random() * 10000 + 1), 'width='+width+', height='+height);
       if (window.focus) {newwindow.focus()}
   }
   share2(net) {
@@ -151,7 +151,7 @@ export class AppComponent {
           break;
       }
     }
-  } 
+  }
 
   ngOnInit() {
     this.colorList = this.colorService.getColorList();
@@ -385,114 +385,114 @@ export class AppComponent {
   }
 
   colorizeTile(tile) {
-    // let canvas = tile.el;
-    // let context = canvas.getContext('2d');
-    // let pixelLeftTop = canvas._leaflet_pos;
-    // let canvasData = context.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
-    // let color = this.hsvColorService.getColor(0);
-    // let topPart = 0;
-    // let bottomPart = 0;
-    // let temperature;
-    // let absolutePixelX = pixelLeftTop.x + this.screenOffsetX;
-    // let absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
-    // for (let pixelX = 0; pixelX < this.canvasWidth; ++pixelX) {
-    //   let leftLine = ((absolutePixelX / this.step) << 0) * this.step;
-    //   let refX = absolutePixelX - leftLine;
-    //   for (let pixelY = 0; pixelY < this.canvasHeight; ++pixelY) {
-    //     if (absolutePixelX % this.step != 0 || absolutePixelY % this.step != 0) {
-    //       let topLine = ((absolutePixelY / this.step) << 0) * this.step;
-    //       let currentDistances = this.distanceCache[refX][absolutePixelY - topLine];
-    //       if (currentDistances) {
-    //         topPart = 0;
-    //         bottomPart = 0;
-    //         let length2 = currentDistances.length;
-    //         for (let index = 0; index < length2; ++index) {
-    //           let distance = currentDistances[index];
-    //           let x1 = (index / 6) << 0;
-    //           let y1 = index - x1 * 6;
-    //           let x2 = leftLine + (x1 - 1) * this.step;
-    //           let y2 = topLine + (y1 - 1) * this.step;
-    //           let value = this.refPoints[x2][y2];
-    //           topPart += value / distance;
-    //           bottomPart += 1 / distance;
-    //         }
-    //         temperature = topPart / bottomPart;
-    //       }
-    //       // temperature = Math.ceil(temperature);
-    //       temperature = Math.round(temperature * 10) / 10;
-    //       // temperature = temperature.toFixed(1);
-    //       color = this.hsvColorService.getColor(temperature);
-    //     }
-    //     let index = (pixelX + pixelY * this.canvasWidth) * 4;
-    //     canvasData.data[index] = color.r;
-    //     canvasData.data[++index] = color.g;
-    //     canvasData.data[++index] = color.b;
-    //     canvasData.data[++index] = 255;
-    //     ++absolutePixelY;
-    //   }
-    //   ++absolutePixelX;
-    //   absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
-    // }
-    // context.putImageData(canvasData, 0, 0);
+    let canvas = tile.el;
+    let context = canvas.getContext('2d');
+    let pixelLeftTop = canvas._leaflet_pos;
+    let canvasData = context.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
+    let color = this.hsvColorService.getColor(0);
+    let topPart = 0;
+    let bottomPart = 0;
+    let temperature;
+    let absolutePixelX = pixelLeftTop.x + this.screenOffsetX;
+    let absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
+    for (let pixelX = 0; pixelX < this.canvasWidth; ++pixelX) {
+      let leftLine = ((absolutePixelX / this.step) << 0) * this.step;
+      let refX = absolutePixelX - leftLine;
+      for (let pixelY = 0; pixelY < this.canvasHeight; ++pixelY) {
+        if (absolutePixelX % this.step != 0 || absolutePixelY % this.step != 0) {
+          let topLine = ((absolutePixelY / this.step) << 0) * this.step;
+          let currentDistances = this.distanceCache[refX][absolutePixelY - topLine];
+          if (currentDistances) {
+            topPart = 0;
+            bottomPart = 0;
+            let length2 = currentDistances.length;
+            for (let index = 0; index < length2; ++index) {
+              let distance = currentDistances[index];
+              let x1 = (index / 6) << 0;
+              let y1 = index - x1 * 6;
+              let x2 = leftLine + (x1 - 1) * this.step;
+              let y2 = topLine + (y1 - 1) * this.step;
+              let value = this.refPoints[x2][y2];
+              topPart += value / distance;
+              bottomPart += 1 / distance;
+            }
+            temperature = topPart / bottomPart;
+          }
+          // temperature = Math.ceil(temperature);
+          temperature = Math.round(temperature * 10) / 10;
+          // temperature = temperature.toFixed(1);
+          color = this.hsvColorService.getColor(temperature);
+        }
+        let index = (pixelX + pixelY * this.canvasWidth) * 4;
+        canvasData.data[index] = color.r;
+        canvasData.data[++index] = color.g;
+        canvasData.data[++index] = color.b;
+        canvasData.data[++index] = 255;
+        ++absolutePixelY;
+      }
+      ++absolutePixelX;
+      absolutePixelY = pixelLeftTop.y + this.screenOffsetY;
+    }
+    context.putImageData(canvasData, 0, 0);
   }
 
 
   getRefPoints(imageData) {
 
-    // let startWorldPoint = this.map.latLngToLayerPoint(new L.LatLng(85, -180));
-    // this.screenOffsetX = Math.abs(startWorldPoint.x);
-    // this.screenOffsetY = Math.abs(startWorldPoint.y);
+    let startWorldPoint = this.map.latLngToLayerPoint(new L.LatLng(85, -180));
+    this.screenOffsetX = Math.abs(startWorldPoint.x);
+    this.screenOffsetY = Math.abs(startWorldPoint.y);
 
-    // let leftTop = {x: 0, y: 0};
-    // let rightBottom = {x: 0, y: 0};
-    // console.log('getRefPoints: '+ this.tiles.length)
-    // for (let item in this.tiles) {
-    //   let currentTile = this.tiles[item];
-    //   let startTilePoint = currentTile.el._leaflet_pos;
-    //   if (startTilePoint.x < leftTop.x) {
-    //     leftTop.x = startTilePoint.x;
-    //   }
-    //   if (startTilePoint.y < leftTop.y) {
-    //     leftTop.y = startTilePoint.y;
-    //   }
-    //   if (startTilePoint.x + 256 > rightBottom.x) {
-    //     rightBottom.x = startTilePoint.x + 256;
-    //   }
-    //   if (startTilePoint.y + 256 > rightBottom.y) {
-    //     rightBottom.y = startTilePoint.y + 256;
-    //   }
-    // }
-    // let startNetX = this.screenOffsetX + leftTop.x;
-    // let startNetY = this.screenOffsetY + leftTop.y;
+    let leftTop = {x: 0, y: 0};
+    let rightBottom = {x: 0, y: 0};
+    console.log('getRefPoints: '+ this.tiles.length)
+    for (let item in this.tiles) {
+      let currentTile = this.tiles[item];
+      let startTilePoint = currentTile.el._leaflet_pos;
+      if (startTilePoint.x < leftTop.x) {
+        leftTop.x = startTilePoint.x;
+      }
+      if (startTilePoint.y < leftTop.y) {
+        leftTop.y = startTilePoint.y;
+      }
+      if (startTilePoint.x + 256 > rightBottom.x) {
+        rightBottom.x = startTilePoint.x + 256;
+      }
+      if (startTilePoint.y + 256 > rightBottom.y) {
+        rightBottom.y = startTilePoint.y + 256;
+      }
+    }
+    let startNetX = this.screenOffsetX + leftTop.x;
+    let startNetY = this.screenOffsetY + leftTop.y;
 
-    // let endNetX = this.screenOffsetX + rightBottom.x;
-    // let endNetY = this.screenOffsetY + rightBottom.y;
+    let endNetX = this.screenOffsetX + rightBottom.x;
+    let endNetY = this.screenOffsetY + rightBottom.y;
 
-    // let leftLine = ((startNetX / this.step) << 0) * this.step;
-    // let rightLine = ((endNetX / this.step + 1) << 0) * this.step;
+    let leftLine = ((startNetX / this.step) << 0) * this.step;
+    let rightLine = ((endNetX / this.step + 1) << 0) * this.step;
 
-    // let topLine = ((startNetY / this.step) << 0) * this.step;
-    // let bottomLine = ((endNetY / this.step + 1) << 0) * this.step;
+    let topLine = ((startNetY / this.step) << 0) * this.step;
+    let bottomLine = ((endNetY / this.step + 1) << 0) * this.step;
     let refs = {};
-    // let finishLineX = rightLine + 3 * this.step;
-    // let finishLineY = bottomLine + 3 * this.step;
-    // let startLineX = leftLine - 2 * this.step;
-    // let startLineY = topLine - 2 * this.step;
-    // console.log('getRefPoints: '+ finishLineX)
-    // console.log('getRefPoints: '+ finishLineY)
-    // for (let verticalLine = startLineX; verticalLine <= finishLineX; verticalLine += this.step) {
-    //   refs[verticalLine] = {};
-    //   for (let horizontalLine = startLineY; horizontalLine <= finishLineY; horizontalLine += this.step) {
-    //     let pointLatLng = this.map.layerPointToLatLng({
-    //       x: verticalLine - this.screenOffsetX,
-    //       y: horizontalLine - this.screenOffsetY
-    //     });
-    //     let imageX = ((2 * (180 + pointLatLng.lng)) << 0);
-    //     let imageY = ((2 * (85 - pointLatLng.lat)) << 0);
-    //     let imageScope = 4 * (imageY * 720 + imageX);
-    //     refs[verticalLine][horizontalLine] = imageData.data[imageScope] - 150;
-    //   }
-    // }
+    let finishLineX = rightLine + 3 * this.step;
+    let finishLineY = bottomLine + 3 * this.step;
+    let startLineX = leftLine - 2 * this.step;
+    let startLineY = topLine - 2 * this.step;
+    console.log('getRefPoints: '+ finishLineX)
+    console.log('getRefPoints: '+ finishLineY)
+    for (let verticalLine = startLineX; verticalLine <= finishLineX; verticalLine += this.step) {
+      refs[verticalLine] = {};
+      for (let horizontalLine = startLineY; horizontalLine <= finishLineY; horizontalLine += this.step) {
+        let pointLatLng = this.map.layerPointToLatLng({
+          x: verticalLine - this.screenOffsetX,
+          y: horizontalLine - this.screenOffsetY
+        });
+        let imageX = ((2 * (180 + pointLatLng.lng)) << 0);
+        let imageY = ((2 * (85 - pointLatLng.lat)) << 0);
+        let imageScope = 4 * (imageY * 720 + imageX);
+        refs[verticalLine][horizontalLine] = imageData.data[imageScope] - 150;
+      }
+    }
     return refs;
   }
 
