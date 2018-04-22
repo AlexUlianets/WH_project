@@ -857,7 +857,7 @@
   position: absolute;
   bottom: 90px;
   right: 25px;
-  z-index: 1000;
+  z-index: 10000;
   border: 0;
   color: white;
   font-weight: bold;
