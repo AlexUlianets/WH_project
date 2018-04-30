@@ -4,23 +4,23 @@
     <input (change)="filterSelected($event.target.value)" [value]="filter.value" name="filter" type="radio">
   </label>
 </div> -->
-
+  <img src="/assets/images/settings.png" id="settings">
   <div class="shareButtons">
     <button>
-      <img src="/assets/images/svg/share-option.svg">
+      <img src="/assets/images/share-option.png">
     </button>
     <div>
+      <button (click)="share2('screenShot')">
+        <img src="/assets/images/picture.png">
+      </button>
       <button (click)="share2('T')">
-        <img src="/assets/images/svg/twitter-logo-silhouette.svg">
+        <img src="/assets/images/twitter-logo-silhouette.png">
       </button>
       <button (click)="share2('F')">
-        <img src="/assets/images/svg/facebook-letter-logo.svg">
+        <img src="/assets/images/facebook-letter-logo.png">
       </button>
       <button (click)="share2('G')">
-        <img src="/assets/images/svg/google-plus-logo-button.svg">
-      </button>
-      <button (click)="share2('screenShot')">
-        <img src="/assets/images/svg/picture.svg">
+        <img src="/assets/images/google-plus-logo-button.png">
       </button>
     </div>
   </div>
@@ -38,13 +38,7 @@
 <div id="pHours">
 
 
-  <div class="m_days_menu">
-<!--     <div class="mobile_active_temp visible-xs">
-      <div id="active_days">
-        <span>Now</span>
-        <i class="fa fa-caret-down" aria-hidden="true"></i>
-      </div>
-    </div> -->
+<!--   <div class="m_days_menu">
     <ul class="m_menu">
       <li (click)="applyUpdateMap($event, !1, '0')" class="today" id="active_days">
         <a href="#">
@@ -56,9 +50,8 @@
       <li (click)="applyUpdateMap($event, !1, '2')"><a href="#">{{calDate.days[2]}}</a></li>
       <li (click)="applyUpdateMap($event, !1, '3')"><a href="#">{{calDate.days[3]}}</a></li>
       <li (click)="applyUpdateMap($event, !1, '4')"><a href="#">{{calDate.days[4]}}</a></li>
-      <!-- <li class="active"><a href="#">Now</a></li> -->
     </ul>
-  </div>
+  </div> -->
 
   <div class="m_scale_wrap">
     
@@ -123,42 +116,42 @@
       <ul class="m_menu">
           <li (click)="filterSelected('temperature')" [ngClass]="currentFilter=='temperature'?'active':''">
               <a href="#">
-                  <span class="title">Temperature</span>
                   <span class="img_warp">
-                      <span class="icon temp">temp</span>
+                      <span class="icon2"><img src="/assets/images/wi-thermometer.png"></span>
                   </span>
+                  <span class="title">Temperature</span>
               </a>
           </li>
           <li (click)="filterSelected('precipitations')" [ngClass]="currentFilter=='precipitations'?'active':''">
               <a href="#">
-                  <span class="title">Precipitations</span>
                   <span class="img_warp">
-                      <span class="icon pressure">pressure</span>
+                      <span class="icon2"><img src="/assets/images/wi-umbrella.png"></span>
                   </span>
+                  <span class="title">Precipitations</span>
               </a>
           </li>
           <li (click)="filterSelected('clouds')" [ngClass]="currentFilter=='clouds'?'active':''">
               <a href="#">
-                  <span class="title">Clouds</span>
                   <span class="img_warp">
-                      <span class="icon cloud">cloud</span>
+                      <span class="icon2"><img src="/assets/images/wi-cloud.png"></span>
                   </span>
+                  <span class="title">Clouds</span>
               </a>
           </li>
           <li [ngClass]="windJSLeaflet.canvasStatus?'active':''" (click)="windOffOn()">
               <a href="#">
-                  <span class="title">Wind</span>
                   <span class="img_warp">
-                      <span class="icon wind">wind</span>
+                      <span class="icon2"><img src="/assets/images/wi-windy.png"></span>
                   </span>
+                  <span class="title">Wind</span>
               </a>
           </li>
       <!--     <li>
               <a href="#">
-                  <span class="title">UV index</span>
                   <span class="img_warp uv">
                       uv
                   </span>
+                  <span class="title">UV index</span>
               </a>
           </li> -->
       </ul>
@@ -176,23 +169,25 @@
 </div>
 
 <div class="calendar-wrap">
+  <img src="/assets/images/play.png" id="playMap">  
   <!--<label for="calendar">{{calendarFormatted}}</label>-->
   <div class="calendar-box">
-    <p-calendar [(ngModel)]="calendar" dateFormat="dd.mm.yy"
+    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -"
                 [disabled]="calendarDisabled"
-                [utc]="true"
-                [showTime]="calendarShowTime"
+                [utc]="false"
+                [showTime]="true"
                 [hourFormat]="24"
                 [locale]="langRU"
-                [showOtherMonths]="false"
+                [showOtherMonths]="true"
                 [minDate]="calendarMinDate"
                 [maxDate]="calendarMaxDate"
                 [inputId]="'calendar'"
                 [readonlyInput]="true"></p-calendar>
   </div>
-  <div class="update-btn-box">
+  <!-- [showTime]="calendarShowTime" -->
+  <!-- <div class="update-btn-box">
     <a href="#" (click)="applyUpdateMap($event)">Update</a>
-  </div>
+  </div> -->
 </div>
 
 <canvas style="display: none" id="temp-image"></canvas>
