@@ -2,7 +2,8 @@ export class DevelopUtil {
 
   // private static HOST = window.location.protocol + '//' + window.location.hostname + ':8888/';
 
-  private static HOST = 'http://test.map.worldweatheronline.com:8888/';
+  private static HOST = window.location.protocol + '//' + window.location.hostname + ':8888/';
+  // private static HOST = 'http://test.map.worldweatheronline.com:8888/';
 
   public static getHost() {
     return DevelopUtil.HOST;
