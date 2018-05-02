@@ -13,6 +13,7 @@ import { MapDataHttpService } from './services/http/map.data.http.service';
 import { DevelopUtil } from './utils/develop.utils';
 import { WindStateService } from './wind/wind.state.service';
 import { Http } from '@angular/http';
+import { CalendarModule } from 'primeng/primeng';
 
 import * as domtoimage from 'dom-to-image';
 import * as FileSaver from 'file-saver';
@@ -22,7 +23,7 @@ import * as FileSaver from 'file-saver';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [CanvasLayer, WindJSLeaflet, WindStateService]
+  providers: [CanvasLayer, WindJSLeaflet, WindStateService, CalendarModule]
 })
 export class AppComponent {
 
