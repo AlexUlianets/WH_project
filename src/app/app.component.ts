@@ -575,9 +575,13 @@ export class AppComponent {
     return colorConfig;
   }
 
-  applyUpdateMap($event, h, d) {
+  applyUpdateMap($event, h, d, justUpdateIt?) {
+    if(justUpdateIt){
+      this.updateMap();
+      return 0;
+    }
     $event.preventDefault();
-    if(h){
+    if(h !== !1){
       this.calendar = moment(this.calendar).startOf('day').add(d, 'd').add(h, 'h').toDate();
       this.calDate.hours = h;
     }else{

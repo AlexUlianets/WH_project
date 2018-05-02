@@ -58,7 +58,7 @@ a.ui-state-default:not(.ui-state-disabled){
 .ui-timepicker.ui-widget-header{
 	display: none;
 }
-.ui-datepicker-current-day.ui-datepicker-today{
+.ui-datepicker-current-day{
 	background-color: #9fc920;
 }
 .ui-datepicker.ui-widget .ui-datepicker-calendar td a {
@@ -118,4 +118,8 @@ a.leaflet-control-zoom-out{
 }
 .leaflet-control-container a.leaflet-disabled{
   opacity: 0.6;
+}
+
+.leaflet-control-attribution{
+  display: none;
 }
