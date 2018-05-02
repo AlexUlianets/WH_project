@@ -4,27 +4,56 @@
     <input (change)="filterSelected($event.target.value)" [value]="filter.value" name="filter" type="radio">
   </label>
 </div> -->
-  <img src="/assets/images/settings.png" id="settings">
-  <div class="shareButtons">
-    <button>
-      <img src="/assets/images/share-option.png">
+<img src="/assets/images/settings.png" id="settings" (click)="settings=true">
+<div class="shareButtons">
+  <button>
+    <img src="/assets/images/share-option.png">
+  </button>
+  <div>
+    <button (click)="share2('screenShot')">
+      <img src="/assets/images/picture.png">
     </button>
+    <button (click)="share2('T')">
+      <img src="/assets/images/twitter-logo-silhouette.png">
+    </button>
+    <button (click)="share2('F')">
+      <img src="/assets/images/facebook-letter-logo.png">
+    </button>
+    <button (click)="share2('G')">
+      <img src="/assets/images/google-plus-logo-button.png">
+    </button>
+  </div>
+</div>
+<div id="pSettings" [ngStyle]="{'right': settings?'0%':'-100%'}">
+  <img src="/assets/images/close.png" (click)="settings=false">
+  <div>
     <div>
-      <button (click)="share2('screenShot')">
-        <img src="/assets/images/picture.png">
-      </button>
-      <button (click)="share2('T')">
-        <img src="/assets/images/twitter-logo-silhouette.png">
-      </button>
-      <button (click)="share2('F')">
-        <img src="/assets/images/facebook-letter-logo.png">
-      </button>
-      <button (click)="share2('G')">
-        <img src="/assets/images/google-plus-logo-button.png">
-      </button>
+      <h4 style="font-weight: 500;">SETTING</h4>
+      <p>
+        <span>Temperature</span>
+        <dir class="selectetiveSet">
+          <span class="active">C</span>
+          <span>C</span>
+        </dir>
+      </p>
+      <p>
+        <span>Precipitation</span>
+        <dir class="selectetiveSet">
+          <span class="active">In</span>
+          <span>C</span>
+        </dir>
+      </p>
+      <p>
+        <span>Time</span>
+        <dir class="selectetiveSet">
+          <span class="active">24h</span>
+          <span>12h</span>
+        </dir>
+      </p>
     </div>
   </div>
- <!--  <button (click)="shareTW()" class="btn btn-lg btn-primary btn-block">
+</div>
+<!--  <button (click)="shareTW()" class="btn btn-lg btn-primary btn-block">
     Share to TW
   </button>
   <button (click)="shareGoogle()" class="btn btn-lg btn-primary btn-block">
@@ -32,13 +61,9 @@
   </button> -->
 <div wth-cursor-dialog id="lmap"></div>
 <div id="cursor-dialog-box">{{mouseTemperature}} <span *ngIf="currentFilter === 'temperature'">&deg;C</span><span *ngIf="currentFilter === 'clouds'">%</span><span *ngIf="currentFilter === 'precipitations'">мм</span></div>
-
 <div *ngIf="loadingStatus" class="loading">Loading...</div>
-
 <div id="pHours">
-
-
-<!--   <div class="m_days_menu">
+  <!--   <div class="m_days_menu">
     <ul class="m_menu">
       <li (click)="applyUpdateMap($event, !1, '0')" class="today" id="active_days">
         <a href="#">
@@ -52,10 +77,8 @@
       <li (click)="applyUpdateMap($event, !1, '4')"><a href="#">{{calDate.days[4]}}</a></li>
     </ul>
   </div> -->
-
   <div class="m_scale_wrap">
-    
-   <!--  <div class="range_btn_wrap">
+    <!--  <div class="range_btn_wrap">
       <div class="range_btn">
         <button id="play_range">
           <i class="fa fa-play" aria-hidden="true"></i>
@@ -75,77 +98,51 @@
         <div class="title">next</div>
       </div>
     </div> -->
-
-    <div id="slider_range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips" [ngStyle]="{'display': currentFilter=='precipitations'?'none':'block'}">
+    <div id="slider_range" [ngStyle]="{'background': 'linear-gradient(to right, #ffffff 0%,#ffffff '+calDate.hours*4.3478+'%,#ffffff '+calDate.hours*4.3478+'%,#6b6b6b '+calDate.hours*4.3478+'%,#6b6b6b 100%)'}" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips" [ngStyle]="{'display': currentFilter=='precipitations'?'none':'block'}">
       <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" [style.left.%]="calDate.hours*4.3478"></span>
-      <span class="ui-slider-pip ui-slider-pip-first ui-slider-pip-hide ui-slider-pip-0" style="left: 0%" (click)="applyUpdateMap($event, '0', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="0">0:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-1" style="left: 4.3478%" (click)="applyUpdateMap($event, '1', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="1">1:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-2" style="left: 8.6957%" (click)="applyUpdateMap($event, '2', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="2">2:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-3" style="left: 13.0435%" (click)="applyUpdateMap($event, '3', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="3">3:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-4" style="left: 17.3913%" (click)="applyUpdateMap($event, '4', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="4">4:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-5" style="left: 21.7391%" (click)="applyUpdateMap($event, '5', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="5">5:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-6" style="left: 26.0870%" (click)="applyUpdateMap($event, '6', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="6">6:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-7" style="left: 30.4348%" (click)="applyUpdateMap($event, '7', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="7">7:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-8" style="left: 34.7826%" (click)="applyUpdateMap($event, '8', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="8">8:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-9" style="left: 39.1304%" (click)="applyUpdateMap($event, '9', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="9">9:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" style="left: 43.4783%" (click)="applyUpdateMap($event, '10', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="10">10:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-11" style="left: 47.8261%" (click)="applyUpdateMap($event, '11', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="11">11:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-12 ui-slider-pip-initial ui-slider-pip-selected" style="left: 52.1739%" (click)="applyUpdateMap($event, '12', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="12">12:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-13" style="left: 56.5217%" (click)="applyUpdateMap($event, '13', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="13">13:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-14" style="left: 60.8696%" (click)="applyUpdateMap($event, '14', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="14">14:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-15" style="left: 65.2174%" (click)="applyUpdateMap($event, '15', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="15">15:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-16" style="left: 69.5652%" (click)="applyUpdateMap($event, '16', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="16">16:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-17" style="left: 73.9130%" (click)="applyUpdateMap($event, '17', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="17">17:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-18" style="left: 78.2609%" (click)="applyUpdateMap($event, '18', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="18">18:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-19" style="left: 82.6087%" (click)="applyUpdateMap($event, '19', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="19">19:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-20" style="left: 86.9565%" (click)="applyUpdateMap($event, '20', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="20">20:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-21" style="left: 91.3043%" (click)="applyUpdateMap($event, '21', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="21">21:00</span></span><span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-22" style="left: 95.6522%" (click)="applyUpdateMap($event, '22', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="22">22:00</span></span><span class="ui-slider-pip ui-slider-pip-last ui-slider-pip-hide ui-slider-pip-23" style="left: 100%" (click)="applyUpdateMap($event, '23', '0')"><span class="ui-slider-line"></span>
-      <span class="ui-slider-label" data-value="23">23:00</span></span>
+
+      <span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" *ngFor="let dummy of ' '.repeat(24).split(''), let x = index" [style.left.%]="x*4.3478" (click)="applyUpdateMap($event, x, '0')">
+        <span class="ui-slider-label" data-value="10">{{x}}</span>
+      </span>
+
     </div>
-
   </div>
-
-
-
 </div>
-
 <div id="pHoursTop">
   <div class="m_temp_menu">
-      <ul class="m_menu">
-          <li (click)="filterSelected('temperature')" [ngClass]="currentFilter=='temperature'?'active':''">
-              <a href="#">
+    <ul class="m_menu">
+      <li (click)="filterSelected('temperature')" [ngClass]="currentFilter=='temperature'?'active':''">
+        <a href="#">
                   <span class="img_warp">
                       <span class="icon2"><img src="/assets/images/wi-thermometer.png"></span>
                   </span>
                   <span class="title">Temperature</span>
               </a>
-          </li>
-          <li (click)="filterSelected('precipitations')" [ngClass]="currentFilter=='precipitations'?'active':''">
-              <a href="#">
+      </li>
+      <li (click)="filterSelected('precipitations')" [ngClass]="currentFilter=='precipitations'?'active':''">
+        <a href="#">
                   <span class="img_warp">
                       <span class="icon2"><img src="/assets/images/wi-umbrella.png"></span>
                   </span>
                   <span class="title">Precipitations</span>
               </a>
-          </li>
-          <li (click)="filterSelected('clouds')" [ngClass]="currentFilter=='clouds'?'active':''">
-              <a href="#">
+      </li>
+      <li (click)="filterSelected('clouds')" [ngClass]="currentFilter=='clouds'?'active':''">
+        <a href="#">
                   <span class="img_warp">
                       <span class="icon2"><img src="/assets/images/wi-cloud.png"></span>
                   </span>
                   <span class="title">Clouds</span>
               </a>
-          </li>
-          <li [ngClass]="windJSLeaflet.canvasStatus?'active':''" (click)="windOffOn()">
-              <a href="#">
+      </li>
+      <li [ngClass]="windJSLeaflet.canvasStatus?'active':''" (click)="windOffOn()">
+        <a href="#">
                   <span class="img_warp">
                       <span class="icon2"><img src="/assets/images/wi-windy.png"></span>
                   </span>
                   <span class="title">Wind</span>
               </a>
-          </li>
+      </li>
       <!--     <li>
               <a href="#">
                   <span class="img_warp uv">
@@ -154,40 +151,36 @@
                   <span class="title">UV index</span>
               </a>
           </li> -->
-      </ul>
+    </ul>
   </div>
   <div class="m_uv_wrap" *ngIf="currentFilter === 'temperature'">
     <div class="m_uv_colors">
-        <div class="uv_index_1 color_item" *ngFor="let colorItem of colorList.reverse();">
-            <div class="uv_color_wrap">
-                <div class="uv_color uv_color_1" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}"></div>
-            </div>
-            <div class="count">{{colorItem.tempValue}}</div>
+      <div class="uv_index_1 color_item">
+        <div class="uv_color_wrap">
+          <div class="uv_color uv_color_1" [ngStyle]="{'background-color': 'white', 'color': 'black'}">  
+            <div class="count" [ngStyle]="{'padding': '6px 0'}">C°</div>
+          </div>
         </div>
+      </div>
+      <div class="uv_index_1 color_item" *ngFor="let colorItem of colorList.reverse();">
+        <div class="uv_color_wrap">
+          <div class="uv_color uv_color_1" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}">  
+            <div class="count" [ngStyle]="{'padding': '6px 0'}">{{colorItem.tempValue}}</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-
 <div class="calendar-wrap">
-  <img src="/assets/images/play.png" id="playMap">  
+  <img src="/assets/images/play.png" id="playMap">
   <!--<label for="calendar">{{calendarFormatted}}</label>-->
   <div class="calendar-box">
-    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -"
-                [disabled]="calendarDisabled"
-                [utc]="false"
-                [showTime]="true"
-                [hourFormat]="24"
-                [locale]="langRU"
-                [showOtherMonths]="true"
-                [minDate]="calendarMinDate"
-                [maxDate]="calendarMaxDate"
-                [inputId]="'calendar'"
-                [readonlyInput]="true"></p-calendar>
+    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -" [disabled]="calendarDisabled" [utc]="false" [showTime]="true" [hourFormat]="24" [locale]="langRU" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true"></p-calendar>
   </div>
   <!-- [showTime]="calendarShowTime" -->
   <!-- <div class="update-btn-box">
     <a href="#" (click)="applyUpdateMap($event)">Update</a>
   </div> -->
 </div>
-
 <canvas style="display: none" id="temp-image"></canvas>
