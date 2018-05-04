@@ -32,6 +32,7 @@ export class AppComponent {
   dbl: any;
   p: any;
   tiles: any;
+  Math: any;
 
   currentFilter = 'temperature';
   filters = [{
@@ -44,6 +45,11 @@ export class AppComponent {
     value: 'precipitations',
     display: 'Осадки'
   }];
+  userSettings = {
+    temperature: 'C',
+    precipitation: 'In',
+    timeFormat: '24'
+  }
 
   defaultLat: number = 52.242111;
   defaultLng: number = 21.024092;
@@ -118,6 +124,7 @@ export class AppComponent {
   this.meta.addTag({name: 'description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
   this.meta.addTag({name: 'og:title', content: 'World Weather Map - Interactive weather map. Worldweatheronline'});
   this.meta.addTag({name: 'og:description', content: 'Interactive world weather map by Worldweatheronline.com with temperature, precipitation, cloudiness, wind. Animated hourly and daily weather forecasts on map'});
+  this.Math = Math;
   }
 
   openURLInPopup(url, width, height, popup?) {
