@@ -58,7 +58,7 @@ a.ui-state-default:not(.ui-state-disabled){
 .ui-timepicker.ui-widget-header{
 	display: none;
 }
-.ui-datepicker-current-day.ui-datepicker-today{
+.ui-datepicker-current-day{
 	background-color: #9fc920;
 }
 .ui-datepicker.ui-widget .ui-datepicker-calendar td a {
@@ -72,7 +72,7 @@ a.ui-state-default:not(.ui-state-disabled){
     line-height: 1.8em;
     text-align: left !important;
 }
-.ui-datepicker.ui-widget .ui-datepicker-heade, 
+.ui-datepicker.ui-widget .ui-datepicker-heade,
 .ui-datepicker.ui-widget .ui-datepicker-calendar thead th,
 .ui-widget-header{
 	background: none !important;
@@ -85,7 +85,7 @@ a.ui-state-default:not(.ui-state-disabled){
 	height: 40px !important;
 }
 .ui-datepicker.ui-widget .ui-datepicker-calendar thead th {
-    padding: 5px !important; 
+    padding: 5px !important;
 }
 .leaflet-control-container > div:nth-child(1){
   right: 15px;
@@ -98,7 +98,7 @@ a.ui-state-default:not(.ui-state-disabled){
 a.leaflet-control-zoom-in{
   color: #f3535300 !important;
   background-color: rgba(0,0,0,0) !important;
-  background-image: url(http://localhost:3030/assets/images/plus.png) !important;
+  background-image: url("./assets/images/plus.png") !important;
   background-size: 100% !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -109,7 +109,7 @@ a.leaflet-control-zoom-in{
 a.leaflet-control-zoom-out{
   color: #f3535300 !important;
   background-color: rgba(0,0,0,0) !important;
-  background-image: url(http://localhost:3030/assets/images/con.png) !important;
+  background-image: url("./assets/images/con.png") !important;
   background-size: 100% !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -118,4 +118,8 @@ a.leaflet-control-zoom-out{
 }
 .leaflet-control-container a.leaflet-disabled{
   opacity: 0.6;
+}
+
+.leaflet-control-attribution{
+  display: none;
 }

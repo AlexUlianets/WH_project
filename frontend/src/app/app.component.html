@@ -32,22 +32,22 @@
       <p>
         <span>Temperature</span>
         <dir class="selectetiveSet">
-          <span class="active">C</span>
-          <span>C</span>
+          <span [ngClass]="{'active': userSettings.temperature == 'C'}" (click)="userSettings.temperature = 'C'">C</span>
+          <span [ngClass]="{'active': userSettings.temperature == 'F'}" (click)="userSettings.temperature = 'F'">F</span>
         </dir>
       </p>
       <p>
         <span>Precipitation</span>
         <dir class="selectetiveSet">
-          <span class="active">In</span>
-          <span>C</span>
+          <span [ngClass]="{'active': userSettings.precipitation == 'In'}" (click)="userSettings.precipitation = 'In'">In</span>
+          <span [ngClass]="{'active': userSettings.precipitation == 'mm'}" (click)="userSettings.precipitation = 'mm'">mm</span>
         </dir>
       </p>
       <p>
         <span>Time</span>
         <dir class="selectetiveSet">
-          <span class="active">24h</span>
-          <span>12h</span>
+          <span [ngClass]="{'active': userSettings.timeFormat == '24'}" (click)="userSettings.timeFormat = '24'">24h</span>
+          <span [ngClass]="{'active': userSettings.timeFormat == '12'}" (click)="userSettings.timeFormat = '12'">12h</span>
         </dir>
       </p>
     </div>
@@ -60,7 +60,11 @@
     Share to Google
   </button> -->
 <div wth-cursor-dialog id="lmap"></div>
-<div id="cursor-dialog-box">{{mouseTemperature}} <span *ngIf="currentFilter === 'temperature'">&deg;C</span><span *ngIf="currentFilter === 'clouds'">%</span><span *ngIf="currentFilter === 'precipitations'">мм</span></div>
+<div id="cursor-dialog-box">
+  <span *ngIf="currentFilter === 'temperature'">{{userSettings.temperature == 'C' ? mouseTemperature : Math.floor(mouseTemperature * 1.8) + 32}} &deg;{{userSettings.temperature}}</span>
+  <span *ngIf="currentFilter === 'clouds'">{{mouseTemperature}} %</span>
+  <span *ngIf="currentFilter === 'precipitations'">{{mouseTemperature}} {{userSettings.precipitation == 'mm' ? userSettings.precipitation : userSettings.precipitation/25.4}}</span>
+</div>
 <div *ngIf="loadingStatus" class="loading">Loading...</div>
 <div id="pHours">
   <!--   <div class="m_days_menu">
@@ -98,11 +102,11 @@
         <div class="title">next</div>
       </div>
     </div> -->
-    <div id="slider_range" [ngStyle]="{'background': 'linear-gradient(to right, #ffffff 0%,#ffffff '+calDate.hours*4.3478+'%,#ffffff '+calDate.hours*4.3478+'%,#6b6b6b '+calDate.hours*4.3478+'%,#6b6b6b 100%)'}" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips" [ngStyle]="{'display': currentFilter=='precipitations'?'none':'block'}">
+    <div id="slider_range" *ngIf="currentFilter !== 'precipitations'" [ngStyle]="{'background': 'linear-gradient(to right, #ffffff 0%,#ffffff '+calDate.hours*4.3478+'%,#ffffff '+calDate.hours*4.3478+'%,#6b6b6b '+calDate.hours*4.3478+'%,#6b6b6b 100%)'}" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content ui-slider-pips" [ngStyle]="{'display': currentFilter=='precipitations'?'none':'block'}">
       <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" [style.left.%]="calDate.hours*4.3478"></span>
 
-      <span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" *ngFor="let dummy of ' '.repeat(24).split(''), let x = index" [style.left.%]="x*4.3478" (click)="applyUpdateMap($event, x, '0')">
-        <span class="ui-slider-label" data-value="10">{{x}}</span>
+      <span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" *ngFor="let dummy of ' '.repeat(24).split(''), let x = index" [style.left.%]="x*4.3478" (click)="applyUpdateMap($event, x)">
+        <span class="ui-slider-label" data-value="10">{{userSettings.timeFormat == '12' ? ((x-11) < 1 ? x + 1 : x-11) : x}}</span>
       </span>
 
     </div>
@@ -158,26 +162,27 @@
       <div class="uv_index_1 color_item">
         <div class="uv_color_wrap">
           <div class="uv_color uv_color_1" [ngStyle]="{'background-color': 'white', 'color': 'black'}">  
-            <div class="count" [ngStyle]="{'padding': '6px 0'}">C°</div>
+            <div class="count" [ngStyle]="{'padding': '6px 0'}">{{userSettings.temperature}}°</div>
           </div>
         </div>
       </div>
       <div class="uv_index_1 color_item" *ngFor="let colorItem of colorList.reverse();">
         <div class="uv_color_wrap">
           <div class="uv_color uv_color_1" [ngStyle]="{'background-color': colorItem.backColor, 'color': colorItem.textColor}">  
-            <div class="count" [ngStyle]="{'padding': '6px 0'}">{{colorItem.tempValue}}</div>
+            <div class="count" [ngStyle]="{'padding': '6px 0'}">{{userSettings.temperature == 'C' ? colorItem.tempValue : colorItem.tempValue * 1.8 + 32 }}</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="calendar-wrap">
+<div class="calendar-wrap" *ngIf="currentFilter !== 'precipitations'">
   <img src="/assets/images/play.png" id="playMap">
   <!--<label for="calendar">{{calendarFormatted}}</label>-->
   <div class="calendar-box">
-    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -" [disabled]="calendarDisabled" [utc]="false" [showTime]="true" [hourFormat]="24" [locale]="langRU" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true"></p-calendar>
+    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -" [disabled]="calendarDisabled" [utc]="false" [showTime]="true" [hourFormat]="userSettings.timeFormat" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true" (onSelect)="applyUpdateMap($event, !1, !1, !0)"></p-calendar>
   </div>
+  <!-- [locale]="langRU" -->
   <!-- [showTime]="calendarShowTime" -->
   <!-- <div class="update-btn-box">
     <a href="#" (click)="applyUpdateMap($event)">Update</a>
