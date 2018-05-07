@@ -46,8 +46,8 @@
       <p>
         <span>Time</span>
         <dir class="selectetiveSet">
-          <span [ngClass]="{'active': userSettings.timeFormat == '24'}" (click)="userSettings.timeFormat = '24'">24h</span>
-          <span [ngClass]="{'active': userSettings.timeFormat == '12'}" (click)="userSettings.timeFormat = '12'">12h</span>
+          <span [ngClass]="{'active': userSettings.timeFormat == '24'}" (click)="userSettings.timeFormat = '24';">24h</span>
+          <span [ngClass]="{'active': userSettings.timeFormat == '12'}" (click)="userSettings.timeFormat = '12';">12h</span>
         </dir>
       </p>
     </div>
@@ -63,7 +63,7 @@
 <div id="cursor-dialog-box">
   <span *ngIf="currentFilter === 'temperature'">{{userSettings.temperature == 'C' ? mouseTemperature : Math.floor(mouseTemperature * 1.8) + 32}} &deg;{{userSettings.temperature}}</span>
   <span *ngIf="currentFilter === 'clouds'">{{mouseTemperature}} %</span>
-  <span *ngIf="currentFilter === 'precipitations'">{{mouseTemperature}} {{userSettings.precipitation == 'mm' ? userSettings.precipitation : userSettings.precipitation/25.4}}</span>
+  <span *ngIf="currentFilter === 'precipitations'">{{userSettings.precipitation == 'mm' ? mouseTemperature : mouseTemperature/25.4}} {{userSettings.precipitation}}</span>
 </div>
 <div *ngIf="loadingStatus" class="loading">Loading...</div>
 <div id="pHours">
