@@ -46,8 +46,8 @@
       <p>
         <span>Time</span>
         <dir class="selectetiveSet">
-          <span [ngClass]="{'active': userSettings.timeFormat == '24'}" (click)="userSettings.timeFormat = '24'">24h</span>
-          <span [ngClass]="{'active': userSettings.timeFormat == '12'}" (click)="userSettings.timeFormat = '12'">12h</span>
+          <span [ngClass]="{'active': userSettings.timeFormat == '24'}" (click)="userSettings.timeFormat = '24';">24h</span>
+          <span [ngClass]="{'active': userSettings.timeFormat == '12'}" (click)="userSettings.timeFormat = '12';">12h</span>
         </dir>
       </p>
     </div>
@@ -63,7 +63,7 @@
 <div id="cursor-dialog-box">
   <span *ngIf="currentFilter === 'temperature'">{{userSettings.temperature == 'C' ? mouseTemperature : Math.floor(mouseTemperature * 1.8) + 32}} &deg;{{userSettings.temperature}}</span>
   <span *ngIf="currentFilter === 'clouds'">{{mouseTemperature}} %</span>
-  <span *ngIf="currentFilter === 'precipitations'">{{mouseTemperature}} {{userSettings.precipitation == 'mm' ? userSettings.precipitation : userSettings.precipitation/25.4}}</span>
+  <span *ngIf="currentFilter === 'precipitations'">{{userSettings.precipitation == 'mm' ? mouseTemperature : mouseTemperature/25.4}} {{userSettings.precipitation}}</span>
 </div>
 <div *ngIf="loadingStatus" class="loading">Loading...</div>
 <div id="pHours">
@@ -106,7 +106,7 @@
       <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" [style.left.%]="calDate.hours*4.3478"></span>
 
       <span class="ui-slider-pip ui-slider-pip-hide ui-slider-pip-10" *ngFor="let dummy of ' '.repeat(24).split(''), let x = index" [style.left.%]="x*4.3478" (click)="applyUpdateMap($event, x)">
-        <span class="ui-slider-label" data-value="10">{{userSettings.timeFormat == '12' ? ((x-11) < 1 ? x + 1 : x-11) : x}}</span>
+        <span class="ui-slider-label" data-value="10">{{userSettings.timeFormat == '12' ? ((x-11) < 1 ? (x + 1) < 10 ? '0'+(x + 1) + ' AM': (x + 1) + ' AM' : (x-11) < 10 ? '0'+(x-11) + ' PM' : (x-11) + ' PM') : x}}</span>
       </span>
 
     </div>
@@ -180,7 +180,7 @@
   <img src="/assets/images/play.png" id="playMap">
   <!--<label for="calendar">{{calendarFormatted}}</label>-->
   <div class="calendar-box">
-    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -" [disabled]="calendarDisabled" [utc]="false" [showTime]="true" [hourFormat]="userSettings.timeFormat" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true" (onSelect)="applyUpdateMap($event, !1, !1, !0)"></p-calendar>
+    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -" [disabled]="calendarDisabled" [utc]="false" [showTime]="false" [hourFormat]="userSettings.timeFormat" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true" (onSelect)="applyUpdateMap($event, !1, !1, !0)"></p-calendar>
   </div>
   <!-- [locale]="langRU" -->
   <!-- [showTime]="calendarShowTime" -->
