@@ -109,7 +109,7 @@ a.leaflet-control-zoom-in{
 a.leaflet-control-zoom-out{
   color: #f3535300 !important;
   background-color: rgba(0,0,0,0) !important;
-  background-image: url("./assets/images/con.png") !important;
+  background-image: url("assets/images/connection_image.png") !important;
   background-size: 100% !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
