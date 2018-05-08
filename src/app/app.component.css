@@ -276,7 +276,7 @@
 #pHours #slider_range .ui-slider-pip {
   position: absolute;
   top: -2px;
-  margin-left: -12px;
+  margin-left: -1.3%;
   text-align: center;
   color: #fff;
   font-size: 12px;

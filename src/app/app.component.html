@@ -180,7 +180,7 @@
   <img src="/assets/images/play.png" id="playMap">
   <!--<label for="calendar">{{calendarFormatted}}</label>-->
   <div class="calendar-box">
-    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd -" [disabled]="calendarDisabled" [utc]="false" [showTime]="false" [hourFormat]="userSettings.timeFormat" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true" (onSelect)="applyUpdateMap($event, !1, !1, !0)"></p-calendar>
+    <p-calendar [(ngModel)]="calendar" dateFormat="DD, dd" [disabled]="calendarDisabled" [utc]="false" [showTime]="false" [hourFormat]="userSettings.timeFormat" [showOtherMonths]="true" [minDate]="calendarMinDate" [maxDate]="calendarMaxDate" [inputId]="'calendar'" [readonlyInput]="true" (onSelect)="applyUpdateMap($event, !1, !1, !0)"></p-calendar>
   </div>
   <!-- [locale]="langRU" -->
   <!-- [showTime]="calendarShowTime" -->
