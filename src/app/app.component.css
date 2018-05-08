@@ -480,7 +480,7 @@
   #pHours .m_scale_wrap .ui-slider-pips > span:nth-child(odd) > .ui-slider-label{
     visibility: hidden;
   }
-  #pHours .m_scale_wrap .ui-slider-pips > span:nth-child(1) > .ui-slider-label{
+  #pHours .m_scale_wrap .ui-slider-pips > span:nth-child(1) > .ui-slider-label, #pHours .m_scale_wrap .ui-slider-pips > span:nth-last-child(1) > .ui-slider-label{
     visibility: visible;
   }
   #pHours .m_days_menu ul > li > a {
@@ -507,7 +507,7 @@
   #pHours .m_scale_wrap .ui-slider-pips > span > .ui-slider-label{
     visibility: hidden;
   }
-  #pHours .m_scale_wrap .ui-slider-pips > span:nth-child(4n) > .ui-slider-label{
+  #pHours .m_scale_wrap .ui-slider-pips > span:nth-child(4n-2) > .ui-slider-label, #pHours .m_scale_wrap .ui-slider-pips > span:nth-last-child(1) > .ui-slider-label{
     visibility: visible;
   }
 }
