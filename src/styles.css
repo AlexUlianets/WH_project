@@ -123,3 +123,9 @@ a.leaflet-control-zoom-out{
 .leaflet-control-attribution{
   display: none;
 }
+
+@media (max-width: 487px) {
+  .leaflet-control-container > div:nth-child(1) {
+    top: calc(100% - 180px);
+  }
+}
