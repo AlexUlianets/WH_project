@@ -5,8 +5,8 @@
   </label>
 </div> -->
 <img src="/assets/images/settings.png" id="settings" (click)="settings=true">
-<div class="shareButtons">
-  <button>
+<div class="shareButtons" [ngClass]="{'active': sharedButttonAreShowed}">
+  <button (click)="sharedButttonAreShowed = !sharedButttonAreShowed">
     <img src="/assets/images/share-option.png">
   </button>
   <div>
@@ -63,7 +63,7 @@
 <div id="cursor-dialog-box">
   <span *ngIf="currentFilter === 'temperature'">{{userSettings.temperature == 'C' ? mouseTemperature : Math.floor(mouseTemperature * 1.8) + 32}} &deg;{{userSettings.temperature}}</span>
   <span *ngIf="currentFilter === 'clouds'">{{mouseTemperature}} %</span>
-  <span *ngIf="currentFilter === 'precipitations'">{{userSettings.precipitation == 'mm' ? mouseTemperature : Math.floor(mouseTemperature/25.4)}} {{userSettings.precipitation}}</span>
+  <span *ngIf="currentFilter === 'precipitations'">{{userSettings.precipitation == 'mm' ? mouseTemperature : Math.floor(mouseTemperature/2.54)/10}} {{userSettings.precipitation}}</span>
 </div>
 <div *ngIf="loadingStatus" class="loading">Loading...</div>
 <div id="pHours">
